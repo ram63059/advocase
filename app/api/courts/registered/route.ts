@@ -10,7 +10,7 @@ const schema = z.object({
   courtComplex: z.string().optional(),
   establishment: z.string().optional(),
   barCode: z.string().optional(),
-  year: z.number().optional().nullable(),
+  year: z.string().optional().nullable(),
   advocateName: z.string().optional(),
 })
 

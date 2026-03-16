@@ -47,10 +47,10 @@ export async function GET(request: Request) {
       cases,
       profile: profile ?? { fullName: null, officeName: null, mobile: null, logoUrl: null },
       groupBy,
-    })
+    }) as any
   )
 
-  return new NextResponse(pdfBuffer, {
+  return new NextResponse(pdfBuffer as unknown as BodyInit, {
     headers: {
       'Content-Type': 'application/pdf',
       'Content-Disposition': `attachment; filename="daily-board-${dateStr}.pdf"`,

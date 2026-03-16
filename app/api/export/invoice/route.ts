@@ -75,7 +75,7 @@ export async function GET(request: Request) {
         logoUrl: null, qrCodeUrl: null, bankName: null, bankAccountName: null,
         bankIfsc: null, bankAccountNo: null, upiId: null,
       },
-    })
+    }) as any
   )
 
   // Mark as invoiceGenerated
@@ -84,7 +84,7 @@ export async function GET(request: Request) {
     data: { invoiceGenerated: true },
   })
 
-  return new NextResponse(pdfBuffer, {
+  return new NextResponse(pdfBuffer as unknown as BodyInit, {
     headers: {
       'Content-Type': 'application/pdf',
       'Content-Disposition': `attachment; filename="invoice-${feeId.slice(0, 8)}.pdf"`,

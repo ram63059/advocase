@@ -112,7 +112,7 @@ export async function GET(request: Request) {
   const buffer = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' })
 
   const dateTag = format(new Date(), 'yyyy-MM-dd')
-  return new NextResponse(buffer, {
+  return new NextResponse(buffer as unknown as BodyInit, {
     headers: {
       'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       'Content-Disposition': `attachment; filename="cases-${dateTag}.xlsx"`,

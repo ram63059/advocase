@@ -19,6 +19,7 @@ interface SearchParams {
   year?: string
   nextDateFrom?: string
   nextDateTo?: string
+  [key: string]: string | undefined
 }
 
 interface CasesPageProps {

@@ -97,15 +97,15 @@ export async function POST(request: Request) {
 
     for (const reminder of dueReminders) {
       try {
-        const user = await prisma.user.findUnique({
+        const profile = await prisma.profile.findUnique({
           where: { id: reminder.profileId },
-          select: { email: true, name: true },
+          select: { email: true, fullName: true },
         })
 
-        if (user?.email && reminder.sendEmail) {
+        if (profile?.email && reminder.sendEmail) {
           await resend.emails.send({
             from: 'Advocase <notifications@advocase.app>',
-            to: [user.email],
+            to: [profile.email],
             subject: `Reminder: ${reminder.title}`,
             html: `
               <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">

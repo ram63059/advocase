@@ -15,7 +15,8 @@ export async function POST(request: Request) {
     if (!file) return NextResponse.json({ error: 'No file provided' }, { status: 400 })
 
     const buffer = Buffer.from(await file.arrayBuffer())
-    const url = await uploadFile(bucket, path || `${session.user.id}/${Date.now()}_${file.name}`, buffer, file.type)
+    const bucketName = (bucket === 'case-documents' ? 'case-documents' : 'profile-assets') as 'case-documents' | 'profile-assets'
+    const url = await uploadFile(bucketName, path || `${session.user.id}/${Date.now()}_${file.name}`, buffer, file.type)
 
     return NextResponse.json({ url })
   } catch (error) {

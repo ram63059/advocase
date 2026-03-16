@@ -155,7 +155,7 @@ export async function GET(request: Request) {
 
   const pdfBuffer = await renderToBuffer(LedgerPDF)
 
-  return new NextResponse(pdfBuffer, {
+  return new NextResponse(pdfBuffer as unknown as BodyInit, {
     headers: {
       'Content-Type': 'application/pdf',
       'Content-Disposition': `attachment; filename="ledger-${caseId.slice(0, 8)}.pdf"`,

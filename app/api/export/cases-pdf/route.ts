@@ -161,7 +161,7 @@ export async function GET(request: Request) {
 
   const pdfBuffer = await renderToBuffer(CasesListPDF)
 
-  return new NextResponse(pdfBuffer, {
+  return new NextResponse(pdfBuffer as unknown as BodyInit, {
     headers: {
       'Content-Type': 'application/pdf',
       'Content-Disposition': `attachment; filename="cases-${format(new Date(), 'yyyy-MM-dd')}.pdf"`,
