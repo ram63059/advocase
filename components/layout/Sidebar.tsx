@@ -21,10 +21,11 @@ const navItems = [
 ]
 
 const secondaryItems = [
-  { href: '/reminders',    label: 'Reminders', icon: Bell },
-  { href: '/admin/team',   label: 'Team',      icon: Shield },
-  { href: '/admin/fields', label: 'Fields',    icon: Settings },
-  { href: '/settings',     label: 'Settings',  icon: Settings },
+  { href: '/reminders',  label: 'Reminders',  icon: Bell },
+  { href: '/causelist',  label: 'Cause List', icon: Scale },
+  { href: '/admin/team', label: 'Team',       icon: Shield },
+  { href: '/admin/fields', label: 'Fields',   icon: Settings },
+  { href: '/settings',   label: 'Settings',   icon: Settings },
 ]
 
 interface SidebarProps {

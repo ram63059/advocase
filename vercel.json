@@ -1,0 +1,20 @@
+{
+  "buildCommand": "prisma generate && prisma migrate deploy && next build",
+  "crons": [
+    {
+      "path": "/api/sync/cron",
+      "schedule": "0 */3 * * *"
+    }
+  ],
+  "functions": {
+    "app/api/export/**/*.ts": {
+      "maxDuration": 30
+    },
+    "app/api/sync/**/*.ts": {
+      "maxDuration": 60
+    },
+    "app/api/courts/**/*.ts": {
+      "maxDuration": 15
+    }
+  }
+}
