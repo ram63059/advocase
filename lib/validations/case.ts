@@ -1,0 +1,36 @@
+import { z } from 'zod'
+
+export const caseSchema = z.object({
+  caseNumber: z.string().optional(),
+  cnrNumber: z.string().optional(),
+  referenceNo: z.string().optional(),
+  fileNo: z.string().optional(),
+  fileName: z.string().optional(),
+  year: z.number().int().optional().nullable(),
+  courtType: z.string().optional(),
+  courtName: z.string().optional(),
+  courtNo: z.string().optional(),
+  state: z.string().optional(),
+  district: z.string().optional(),
+  firstParty: z.string().optional(),
+  oppositeParty: z.string().optional(),
+  caseType: z.string().optional(),
+  underSection: z.string().optional(),
+  policeStation: z.string().optional(),
+  firNumber: z.string().optional(),
+  judgeName: z.string().optional(),
+  company: z.string().optional(),
+  empanelment: z.string().optional(),
+  comments: z.string().optional(),
+  filingDate: z.string().optional().nullable(),
+  previousDate: z.string().optional().nullable(),
+  nextDate: z.string().optional().nullable(),
+  fixedFor: z.string().optional(),
+  status: z.enum(['running', 'decided', 'abandoned']).default('running'),
+  isImportant: z.boolean().default(false),
+  briefFacts: z.string().optional(),
+  relevantLaws: z.string().optional(),
+  clientIds: z.array(z.string()).optional(),
+})
+
+export type CaseFormValues = z.infer<typeof caseSchema>

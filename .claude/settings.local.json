@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd:*)",
+      "Read(//c/Users/SRIRAM/coding/**)",
+      "Bash(npx create-next-app@latest advocase-app --typescript --tailwind --eslint --app --src-dir=false --import-alias=\"@/*\" --no-git --yes)",
+      "Bash(git init:*)",
+      "Bash(npx:*)",
+      "Bash(npm install:*)"
+    ]
+  }
+}
