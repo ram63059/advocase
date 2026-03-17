@@ -61,7 +61,7 @@ export function ClientForm({ defaultValues, onSuccess, onCancel }: ClientFormPro
       <div>
         <Label htmlFor="fullName">Full Name *</Label>
         <Input id="fullName" {...register('fullName')} placeholder="e.g. Ravi Kumar" className="mt-1" />
-        {errors.fullName && <p className="text-xs text-red-500 mt-1">{errors.fullName.message}</p>}
+        {errors.fullName && <p className="text-xs text-destructive mt-1">{errors.fullName.message}</p>}
       </div>
       <div>
         <Label htmlFor="mobile">Mobile</Label>
@@ -70,7 +70,7 @@ export function ClientForm({ defaultValues, onSuccess, onCancel }: ClientFormPro
       <div>
         <Label htmlFor="email">Email</Label>
         <Input id="email" type="email" {...register('email')} placeholder="client@email.com" className="mt-1" />
-        {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email.message}</p>}
+        {errors.email && <p className="text-xs text-destructive mt-1">{errors.email.message}</p>}
       </div>
       <div>
         <Label htmlFor="address">Address</Label>
@@ -88,7 +88,7 @@ export function ClientForm({ defaultValues, onSuccess, onCancel }: ClientFormPro
             />
           )}
         />
-        <label htmlFor="dpdp" className="text-xs text-slate-600 cursor-pointer">
+        <label htmlFor="dpdp" className="text-xs text-muted-foreground cursor-pointer">
           Client has given DPDP consent to store their data
         </label>
       </div>
