@@ -86,16 +86,16 @@ export function FieldTypeList({
   }
 
   return (
-    <div className="bg-white rounded-lg border border-slate-200">
-      <div className="px-5 py-4 border-b border-slate-100">
-        <h3 className="font-medium text-slate-900">{label} Options</h3>
-        <p className="text-xs text-slate-500 mt-0.5">
+    <div className="bg-card rounded-xl border border-border">
+      <div className="px-5 py-4 border-b border-border">
+        <h3 className="font-medium text-foreground">{label} Options</h3>
+        <p className="text-xs text-muted-foreground mt-0.5">
           {localItems.length} values
           {localItems.length > 1 ? ' · Drag to reorder' : ''}
         </p>
       </div>
 
-      <div className="divide-y divide-slate-100">
+      <div className="divide-y divide-border">
         {localItems.map(item => (
           <div
             key={item.id}
@@ -104,11 +104,11 @@ export function FieldTypeList({
             onDragOver={e => { e.preventDefault(); setDragOver(item.id) }}
             onDragEnd={handleDragEnd}
             className={`flex items-center gap-3 px-5 py-3 transition-colors ${
-              dragOver === item.id ? 'bg-indigo-50' : 'hover:bg-slate-50'
+              dragOver === item.id ? 'bg-secondary' : 'hover:bg-secondary/30'
             }`}
           >
             <div
-              className="text-slate-300 hover:text-slate-500 cursor-grab active:cursor-grabbing"
+              className="text-muted-foreground/40 hover:text-muted-foreground cursor-grab active:cursor-grabbing"
               title="Drag to reorder"
             >
               <GripVertical size={16} />
@@ -128,14 +128,14 @@ export function FieldTypeList({
                 />
                 <button
                   onClick={handleEditSave}
-                  className="text-emerald-600 hover:text-emerald-700"
+                  className="text-foreground hover:text-foreground/80"
                   title="Save"
                 >
                   <Check size={15} />
                 </button>
                 <button
                   onClick={() => setEditingId(null)}
-                  className="text-slate-400 hover:text-slate-700"
+                  className="text-muted-foreground hover:text-foreground"
                   title="Cancel"
                 >
                   <X size={15} />
@@ -143,17 +143,17 @@ export function FieldTypeList({
               </div>
             ) : (
               <>
-                <span className="flex-1 text-sm text-slate-800">{item.value}</span>
+                <span className="flex-1 text-sm text-foreground">{item.value}</span>
                 <button
                   onClick={() => handleEditStart(item)}
-                  className="text-slate-400 hover:text-slate-700 transition-colors"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
                   title="Edit"
                 >
                   <Pencil size={13} />
                 </button>
                 <button
                   onClick={() => handleDeleteConfirm(item.id)}
-                  className="text-slate-400 hover:text-red-500 transition-colors"
+                  className="text-muted-foreground hover:text-destructive transition-colors"
                   title="Delete"
                 >
                   <Trash2 size={13} />
@@ -164,12 +164,12 @@ export function FieldTypeList({
         ))}
 
         {localItems.length === 0 && (
-          <p className="px-5 py-4 text-sm text-slate-400 italic">No values yet. Add one below.</p>
+          <p className="px-5 py-4 text-sm text-muted-foreground italic">No values yet. Add one below.</p>
         )}
       </div>
 
       {/* Add new value */}
-      <div className="px-5 py-4 border-t border-slate-100">
+      <div className="px-5 py-4 border-t border-border">
         <div className="flex gap-2">
           <Input
             value={newValue}

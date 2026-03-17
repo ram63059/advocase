@@ -82,8 +82,8 @@ export function FieldsPageClient({ grouped, profileId }: FieldsPageClientProps) 
   return (
     <div className="space-y-5">
       <div>
-        <h1 className="text-2xl font-semibold text-slate-900">Field Management</h1>
-        <p className="text-sm text-slate-500 mt-0.5">
+        <h1 className="text-xl font-semibold text-foreground">Field Management</h1>
+        <p className="text-sm text-muted-foreground mt-0.5">
           Manage dropdown options used in case forms
         </p>
       </div>

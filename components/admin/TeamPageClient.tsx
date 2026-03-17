@@ -64,8 +64,8 @@ export function TeamPageClient({ teamMembers, ownerId }: TeamPageClientProps) {
     <div className="space-y-5">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-slate-900">Team</h1>
-          <p className="text-sm text-slate-500 mt-0.5">
+          <h1 className="text-xl font-semibold text-foreground">Team</h1>
+          <p className="text-sm text-muted-foreground mt-0.5">
             Manage your associates and their permissions
           </p>
         </div>
@@ -75,40 +75,40 @@ export function TeamPageClient({ teamMembers, ownerId }: TeamPageClientProps) {
       </div>
 
       {teamMembers.length === 0 ? (
-        <div className="bg-white rounded-lg border border-slate-200 p-10 text-center">
-          <p className="text-slate-500 mb-4">No team members yet</p>
+        <div className="bg-card rounded-xl border border-border p-10 text-center">
+          <p className="text-muted-foreground mb-4">No team members yet</p>
           <Button size="sm" onClick={() => setFormOpen(true)}>
             Invite your first team member
           </Button>
         </div>
       ) : (
-        <div className="bg-white rounded-lg border border-slate-200 overflow-x-auto">
+        <div className="bg-card rounded-xl border border-border overflow-x-auto">
           <table className="w-full text-sm min-w-[800px]">
             <thead>
-              <tr className="border-b border-slate-200 bg-slate-50">
-                <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase">Member</th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase">Role</th>
+              <tr className="border-b border-border bg-secondary/50">
+                <th className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Member</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Role</th>
                 {PERMISSIONS.map(p => (
                   <th
                     key={p.key}
-                    className="px-4 py-3 text-center text-xs font-medium text-slate-500 uppercase whitespace-nowrap"
+                    className="px-4 py-3 text-center text-xs font-medium text-muted-foreground uppercase whitespace-nowrap"
                   >
                     {p.label}
                   </th>
                 ))}
-                <th className="px-4 py-3 text-center text-xs font-medium text-slate-500 uppercase">Active</th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase">Status</th>
+                <th className="px-4 py-3 text-center text-xs font-medium text-muted-foreground uppercase">Active</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Status</th>
                 <th className="px-4 py-3" />
               </tr>
             </thead>
             <tbody>
               {teamMembers.map(member => (
-                <tr key={member.id} className="border-b border-slate-100 hover:bg-slate-50 last:border-0">
+                <tr key={member.id} className="border-b border-border hover:bg-secondary/30 last:border-0">
                   <td className="px-4 py-3">
-                    <p className="font-medium text-slate-900">{member.fullName}</p>
-                    <p className="text-xs text-slate-500">{member.email}</p>
+                    <p className="font-medium text-foreground">{member.fullName}</p>
+                    <p className="text-xs text-muted-foreground">{member.email}</p>
                     {member.mobile && (
-                      <p className="text-xs text-slate-400">{member.mobile}</p>
+                      <p className="text-xs text-muted-foreground/60">{member.mobile}</p>
                     )}
                   </td>
                   <td className="px-4 py-3">
@@ -136,12 +136,12 @@ export function TeamPageClient({ teamMembers, ownerId }: TeamPageClientProps) {
                   </td>
                   <td className="px-4 py-3">
                     {member.joinedAt ? (
-                      <span className="flex items-center gap-1 text-xs text-emerald-600">
+                      <span className="flex items-center gap-1 text-xs text-foreground">
                         <CheckCircle size={12} />
                         Joined {formatDate(member.joinedAt)}
                       </span>
                     ) : (
-                      <span className="flex items-center gap-1 text-xs text-amber-600">
+                      <span className="flex items-center gap-1 text-xs text-muted-foreground">
                         <Mail size={12} />
                         Invited {formatDate(member.invitedAt)}
                       </span>
@@ -151,7 +151,7 @@ export function TeamPageClient({ teamMembers, ownerId }: TeamPageClientProps) {
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="text-red-500 hover:text-red-700 hover:bg-red-50 text-xs h-7"
+                      className="text-muted-foreground hover:text-destructive text-xs h-7"
                       onClick={() => handleRemove(member.id)}
                     >
                       Remove

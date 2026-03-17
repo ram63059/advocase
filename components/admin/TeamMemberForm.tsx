@@ -81,13 +81,13 @@ export function TeamMemberForm({ onSuccess, onCancel }: TeamMemberFormProps) {
       <div>
         <Label htmlFor="fullName">Full Name *</Label>
         <Input id="fullName" {...register('fullName')} placeholder="e.g. Rahul Sharma" className="mt-1" />
-        {errors.fullName && <p className="text-xs text-red-500 mt-1">{errors.fullName.message}</p>}
+        {errors.fullName && <p className="text-xs text-destructive mt-1">{errors.fullName.message}</p>}
       </div>
 
       <div>
         <Label htmlFor="email">Email *</Label>
         <Input id="email" type="email" {...register('email')} placeholder="member@email.com" className="mt-1" />
-        {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email.message}</p>}
+        {errors.email && <p className="text-xs text-destructive mt-1">{errors.email.message}</p>}
       </div>
 
       <div>
@@ -131,7 +131,7 @@ export function TeamMemberForm({ onSuccess, onCancel }: TeamMemberFormProps) {
                 />
               )}
             />
-            <label htmlFor={key} className="text-sm text-slate-700 cursor-pointer">
+            <label htmlFor={key} className="text-sm text-foreground cursor-pointer">
               {label}
             </label>
           </div>
