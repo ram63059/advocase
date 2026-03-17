@@ -120,7 +120,7 @@ export function ReminderForm({ defaultValues, onSuccess, onCancel }: ReminderFor
           className="mt-1"
         />
         {errors.title && (
-          <p className="text-xs text-red-500 mt-1">{errors.title.message}</p>
+          <p className="text-xs text-destructive mt-1">{errors.title.message}</p>
         )}
       </div>
 
@@ -242,7 +242,7 @@ export function ReminderForm({ defaultValues, onSuccess, onCancel }: ReminderFor
               <Switch id="sendEmail" checked={field.value} onCheckedChange={field.onChange} />
             )}
           />
-          <label htmlFor="sendEmail" className="text-sm text-slate-700">Email</label>
+          <label htmlFor="sendEmail" className="text-sm text-foreground">Email</label>
         </div>
 
         {sendEmail && (
@@ -256,7 +256,7 @@ export function ReminderForm({ defaultValues, onSuccess, onCancel }: ReminderFor
               className="mt-1"
             />
             {errors.emailTo && (
-              <p className="text-xs text-red-500 mt-1">{errors.emailTo.message}</p>
+              <p className="text-xs text-destructive mt-1">{errors.emailTo.message}</p>
             )}
           </div>
         )}
@@ -269,8 +269,8 @@ export function ReminderForm({ defaultValues, onSuccess, onCancel }: ReminderFor
               <Switch id="sendSms" checked={field.value} onCheckedChange={field.onChange} />
             )}
           />
-          <label htmlFor="sendSms" className="text-sm text-slate-700">
-            SMS <span className="text-slate-400">(save number for reference)</span>
+          <label htmlFor="sendSms" className="text-sm text-foreground">
+            SMS <span className="text-muted-foreground">(save number for reference)</span>
           </label>
         </div>
 
@@ -291,14 +291,14 @@ export function ReminderForm({ defaultValues, onSuccess, onCancel }: ReminderFor
       <div>
         <Label>Link to Case (optional)</Label>
         {selectedCase ? (
-          <div className="mt-1 flex items-center justify-between p-2.5 bg-indigo-50 rounded-md text-sm border border-indigo-100">
-            <span className="text-indigo-700 truncate">
+          <div className="mt-1 flex items-center justify-between p-2.5 bg-secondary rounded-xl text-sm border border-border">
+            <span className="text-foreground truncate">
               {selectedCase.caseNumber ?? 'Case'} — {selectedCase.firstParty}
             </span>
             <button
               type="button"
               onClick={() => setSelectedCase(null)}
-              className="text-indigo-400 hover:text-indigo-700 ml-2 text-base leading-none"
+              className="text-muted-foreground hover:text-foreground ml-2 text-base leading-none"
             >
               &times;
             </button>
@@ -314,12 +314,12 @@ export function ReminderForm({ defaultValues, onSuccess, onCancel }: ReminderFor
               }}
             />
             {caseResults.length > 0 && (
-              <div className="absolute z-20 w-full bg-white border border-slate-200 rounded-md shadow-lg mt-1 max-h-48 overflow-y-auto">
+              <div className="absolute z-20 w-full bg-card border border-border rounded-xl shadow-lg mt-1 max-h-48 overflow-y-auto">
                 {caseResults.map((c: any) => (
                   <button
                     key={c.id}
                     type="button"
-                    className="w-full text-left px-3 py-2 text-sm hover:bg-slate-50 border-b border-slate-100 last:border-0"
+                    className="w-full text-left px-3 py-2 text-sm hover:bg-secondary border-b border-border last:border-0"
                     onClick={() => {
                       setSelectedCase(c)
                       setCaseResults([])
