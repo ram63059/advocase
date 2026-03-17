@@ -50,8 +50,8 @@ function ResetPasswordForm() {
   if (!token) {
     return (
       <div className="text-center">
-        <p className="text-red-600">Invalid reset link. Please request a new one.</p>
-        <Link href="/forgot-password" className="mt-4 inline-block text-indigo-600 hover:underline">
+        <p className="text-destructive">Invalid reset link. Please request a new one.</p>
+        <Link href="/forgot-password" className="mt-4 inline-block text-foreground hover:underline">
           Request new link
         </Link>
       </div>
@@ -60,8 +60,8 @@ function ResetPasswordForm() {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold text-slate-900">Reset password</h1>
-      <p className="text-slate-500 mt-1">Enter your new password below</p>
+      <h1 className="text-2xl font-semibold text-foreground">Reset password</h1>
+      <p className="text-muted-foreground mt-1">Enter your new password below</p>
       <form onSubmit={handleSubmit} className="mt-8 space-y-4">
         <div className="space-y-1">
           <Label htmlFor="password">New Password</Label>

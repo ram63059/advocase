@@ -31,16 +31,16 @@ export default function ForgotPasswordPage() {
   if (sent) {
     return (
       <div className="text-center">
-        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg className="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg className="w-8 h-8 text-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h2 className="text-xl font-semibold text-slate-900">Check your email</h2>
-        <p className="text-slate-500 mt-2">
+        <h2 className="text-xl font-semibold text-foreground">Check your email</h2>
+        <p className="text-muted-foreground mt-2">
           If an account exists for {email}, we&apos;ve sent a password reset link.
         </p>
-        <Link href="/login" className="mt-6 inline-block text-indigo-600 hover:underline font-medium">
+        <Link href="/login" className="mt-6 inline-block text-foreground hover:underline font-medium">
           Back to sign in
         </Link>
       </div>
@@ -49,8 +49,8 @@ export default function ForgotPasswordPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold text-slate-900">Forgot password</h1>
-      <p className="text-slate-500 mt-1">Enter your email to receive a reset link</p>
+      <h1 className="text-2xl font-semibold text-foreground">Forgot password</h1>
+      <p className="text-muted-foreground mt-1">Enter your email to receive a reset link</p>
       <form onSubmit={handleSubmit} className="mt-8 space-y-4">
         <div className="space-y-1">
           <Label htmlFor="email">Email</Label>
@@ -67,8 +67,8 @@ export default function ForgotPasswordPage() {
           {loading ? 'Sending...' : 'Send reset link'}
         </Button>
       </form>
-      <p className="text-center text-sm text-slate-500 mt-6">
-        <Link href="/login" className="text-indigo-600 hover:underline">
+      <p className="text-center text-sm text-muted-foreground mt-6">
+        <Link href="/login" className="text-foreground hover:underline">
           Back to sign in
         </Link>
       </p>
