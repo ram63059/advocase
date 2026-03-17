@@ -1,7 +1,8 @@
 'use client'
 import { useState } from 'react'
-import { Calendar, momentLocalizer, Views } from 'react-big-calendar'
-import moment from 'moment'
+import { Calendar, dateFnsLocalizer, Views } from 'react-big-calendar'
+import { format, parse, startOfWeek, getDay, isSameDay } from 'date-fns'
+import { enUS } from 'date-fns/locale/en-US'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
@@ -11,7 +12,8 @@ import { DayPopover } from './DayPopover'
 import { ColorCodeManager } from './ColorCodeManager'
 import { COURT_TYPES, DEFAULT_FIXED_FOR } from '@/lib/constants'
 
-const localizer = momentLocalizer(moment)
+const locales = { 'en-US': enUS }
+const localizer = dateFnsLocalizer({ format, parse, startOfWeek, getDay, locales })
 
 interface CalendarEvent {
   id: string
@@ -59,7 +61,7 @@ export function CalendarView({ events, colorCodes, profileId, searchParams }: Ca
   }
 
   const handleSelectSlot = ({ start }: { start: Date }) => {
-    const dayEvents = events.filter(e => moment(e.start).isSame(start, 'day'))
+    const dayEvents = events.filter(e => isSameDay(e.start, start))
     setSelectedDay({ date: start, events: dayEvents })
   }
 
@@ -93,7 +95,7 @@ export function CalendarView({ events, colorCodes, profileId, searchParams }: Ca
     <div className="space-y-4">
       {/* Toolbar */}
       <div className="flex flex-wrap items-center gap-3">
-        <h1 className="text-2xl font-semibold text-slate-900">Calendar</h1>
+        <h1 className="text-xl font-semibold text-foreground">Calendar</h1>
 
         <Select value={courtTypeFilter || '_all'} onValueChange={v => setCourtTypeFilter(v === '_all' ? '' : v)}>
           <SelectTrigger className="w-44 h-9">
@@ -129,7 +131,7 @@ export function CalendarView({ events, colorCodes, profileId, searchParams }: Ca
           <Button
             variant="outline"
             size="sm"
-            onClick={() => window.open(`/api/export/daily-board?date=${moment(date).format('YYYY-MM-DD')}`, '_blank')}
+            onClick={() => window.open(`/api/export/daily-board?date=${format(date, 'yyyy-MM-dd')}`, '_blank')}
           >
             <Printer size={14} className="mr-1.5" />
             Print Day Board
@@ -139,7 +141,7 @@ export function CalendarView({ events, colorCodes, profileId, searchParams }: Ca
 
       {/* Calendar */}
       <div
-        className="bg-white rounded-lg border border-slate-200 overflow-hidden"
+        className="bg-card rounded-xl border border-border overflow-hidden"
         style={{ height: 'calc(100vh - 230px)', minHeight: '500px' }}
       >
         <Calendar
@@ -168,7 +170,7 @@ export function CalendarView({ events, colorCodes, profileId, searchParams }: Ca
       {colorCodes.length > 0 && (
         <div className="flex flex-wrap gap-4">
           {colorCodes.map(cc => (
-            <div key={cc.id} className="flex items-center gap-1.5 text-xs text-slate-600">
+            <div key={cc.id} className="flex items-center gap-1.5 text-xs text-muted-foreground">
               <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: cc.color }} />
               {cc.label}
             </div>

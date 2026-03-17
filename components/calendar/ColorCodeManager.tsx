@@ -78,22 +78,22 @@ export function ColorCodeManager({ open, onClose, existingCodes }: ColorCodeMana
         <SheetHeader>
           <SheetTitle>Calendar Color Codes</SheetTitle>
         </SheetHeader>
-        <p className="text-sm text-slate-500 mt-1 mb-6">
+        <p className="text-sm text-muted-foreground mt-1 mb-6">
           Assign colors to "Fixed For" labels for the calendar.
         </p>
 
         <div className="space-y-4">
           {/* Existing codes */}
           {codes.length === 0 ? (
-            <p className="text-sm text-slate-400 italic">No color codes configured yet.</p>
+            <p className="text-sm text-muted-foreground italic">No color codes configured yet.</p>
           ) : (
             codes.map(code => (
               <div key={code.id} className="flex items-center gap-3">
-                <div className="w-6 h-6 rounded border border-slate-200" style={{ backgroundColor: code.color }} />
-                <span className="text-sm flex-1 text-slate-700">{code.label}</span>
+                <div className="w-6 h-6 rounded border border-border" style={{ backgroundColor: code.color }} />
+                <span className="text-sm flex-1 text-foreground">{code.label}</span>
                 <button
                   onClick={() => deleteCode(code.id)}
-                  className="text-slate-400 hover:text-red-500 transition-colors"
+                  className="text-muted-foreground hover:text-destructive transition-colors"
                 >
                   <Trash2 size={14} />
                 </button>
@@ -102,8 +102,8 @@ export function ColorCodeManager({ open, onClose, existingCodes }: ColorCodeMana
           )}
 
           {/* Add new code */}
-          <div className="pt-4 border-t border-slate-100 space-y-3">
-            <p className="text-xs font-medium text-slate-600 uppercase tracking-wide">Add Color Code</p>
+          <div className="pt-4 border-t border-border space-y-3">
+            <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Add Color Code</p>
             <div>
               <Label htmlFor="newLabel">Label (Fixed For value)</Label>
               <Input
@@ -125,7 +125,7 @@ export function ColorCodeManager({ open, onClose, existingCodes }: ColorCodeMana
                   type="color"
                   value={newColor}
                   onChange={e => setNewColor(e.target.value)}
-                  className="w-10 h-10 rounded cursor-pointer border border-slate-200 p-0.5"
+                  className="w-10 h-10 rounded cursor-pointer border border-border p-0.5"
                 />
                 <Input
                   value={newColor}
