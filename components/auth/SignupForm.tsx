@@ -62,36 +62,36 @@ export function SignupForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-4">
-      <div className="space-y-1">
+      <div className="space-y-1.5">
         <Label>Full Name *</Label>
         <Input placeholder="Advocate Ramesh Kumar" {...register('fullName')} />
-        {errors.fullName && <p className="text-xs text-red-500">{errors.fullName.message}</p>}
+        {errors.fullName && <p className="text-xs text-destructive">{errors.fullName.message}</p>}
       </div>
 
-      <div className="space-y-1">
+      <div className="space-y-1.5">
         <Label>Email *</Label>
         <Input type="email" placeholder="you@example.com" {...register('email')} />
-        {errors.email && <p className="text-xs text-red-500">{errors.email.message}</p>}
+        {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
       </div>
 
-      <div className="space-y-1">
-        <Label>Office / Firm Name <span className="text-slate-400">(optional)</span></Label>
+      <div className="space-y-1.5">
+        <Label>Office / Firm Name <span className="text-muted-foreground font-normal">(optional)</span></Label>
         <Input placeholder="Your Law Chambers" {...register('officeName')} />
       </div>
 
-      <div className="space-y-1">
+      <div className="space-y-1.5">
         <Label>Password *</Label>
         <Input type="password" placeholder="Min. 8 characters" {...register('password')} />
-        {errors.password && <p className="text-xs text-red-500">{errors.password.message}</p>}
+        {errors.password && <p className="text-xs text-destructive">{errors.password.message}</p>}
       </div>
 
-      <div className="space-y-1">
+      <div className="space-y-1.5">
         <Label>Confirm Password *</Label>
         <Input type="password" placeholder="Confirm password" {...register('confirmPassword')} />
-        {errors.confirmPassword && <p className="text-xs text-red-500">{errors.confirmPassword.message}</p>}
+        {errors.confirmPassword && <p className="text-xs text-destructive">{errors.confirmPassword.message}</p>}
       </div>
 
-      <Button type="submit" className="w-full" disabled={loading}>
+      <Button type="submit" className="w-full mt-2" disabled={loading}>
         {loading ? 'Creating account...' : 'Create Account'}
       </Button>
     </form>
