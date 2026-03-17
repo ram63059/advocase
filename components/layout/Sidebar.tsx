@@ -21,11 +21,11 @@ const navItems = [
 ]
 
 const secondaryItems = [
-  { href: '/reminders',  label: 'Reminders',  icon: Bell },
-  { href: '/causelist',  label: 'Cause List', icon: Scale },
-  { href: '/admin/team', label: 'Team',       icon: Shield },
-  { href: '/admin/fields', label: 'Fields',   icon: Settings },
-  { href: '/settings',   label: 'Settings',   icon: Settings },
+  { href: '/reminders',    label: 'Reminders',  icon: Bell },
+  { href: '/causelist',    label: 'Cause List', icon: Scale },
+  { href: '/admin/team',   label: 'Team',       icon: Shield },
+  { href: '/admin/fields', label: 'Fields',     icon: Settings },
+  { href: '/settings',     label: 'Settings',   icon: Settings },
 ]
 
 interface SidebarProps {
@@ -47,15 +47,15 @@ export function Sidebar({ profile }: SidebarProps) {
   }
 
   return (
-    <aside className="hidden md:flex w-60 flex-col bg-white border-r border-slate-200 h-screen shrink-0">
+    <aside className="hidden md:flex w-56 flex-col bg-card border-r border-border h-screen shrink-0">
       {/* Logo */}
-      <div className="flex items-center gap-3 px-5 h-16 border-b border-slate-200 shrink-0">
-        <Scale size={24} className="text-indigo-600" />
-        <span className="font-semibold text-slate-900 text-lg">Advocase</span>
+      <div className="flex items-center gap-2.5 px-5 h-14 border-b border-border shrink-0">
+        <Scale size={20} className="text-foreground" />
+        <span className="font-semibold text-foreground text-base tracking-tight">Advocase</span>
       </div>
 
       {/* Primary Nav */}
-      <nav className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
+      <nav className="flex-1 px-2.5 py-3 space-y-0.5 overflow-y-auto">
         {navItems.map((item) => {
           const active = isActive(item.href)
           return (
@@ -63,21 +63,21 @@ export function Sidebar({ profile }: SidebarProps) {
               key={item.href}
               href={item.href}
               className={cn(
-                'flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-colors',
+                'flex items-center gap-2.5 px-2.5 py-2 rounded-md text-sm font-medium transition-colors',
                 active
-                  ? 'bg-indigo-50 text-indigo-700 border-l-2 border-indigo-600 -ml-px pl-[calc(0.75rem-1px)]'
-                  : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                  ? 'bg-secondary text-foreground'
+                  : 'text-muted-foreground hover:bg-secondary/60 hover:text-foreground'
               )}
             >
-              <item.icon size={18} />
+              <item.icon size={16} strokeWidth={active ? 2 : 1.75} />
               {item.label}
             </Link>
           )
         })}
 
         {/* Divider */}
-        <div className="pt-4 pb-2">
-          <p className="px-3 text-xs font-medium text-slate-400 uppercase tracking-wider">More</p>
+        <div className="pt-3 pb-1.5">
+          <p className="px-2.5 text-[10px] font-semibold text-muted-foreground/70 uppercase tracking-widest">More</p>
         </div>
 
         {secondaryItems.map((item) => {
@@ -87,51 +87,51 @@ export function Sidebar({ profile }: SidebarProps) {
               key={item.href}
               href={item.href}
               className={cn(
-                'flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors',
+                'flex items-center gap-2.5 px-2.5 py-2 rounded-md text-sm transition-colors',
                 active
-                  ? 'bg-indigo-50 text-indigo-700'
-                  : 'text-slate-500 hover:bg-slate-50 hover:text-slate-700'
+                  ? 'bg-secondary text-foreground font-medium'
+                  : 'text-muted-foreground hover:bg-secondary/60 hover:text-foreground'
               )}
             >
-              <item.icon size={16} />
+              <item.icon size={15} strokeWidth={active ? 2 : 1.75} />
               {item.label}
             </Link>
           )
         })}
       </nav>
 
-      {/* User section at bottom */}
-      <div className="border-t border-slate-200 p-3">
+      {/* User section */}
+      <div className="border-t border-border p-2.5">
         {profile.plan === 'free' && (
-          <div className="mb-2 px-3 py-2 bg-amber-50 rounded-md">
-            <p className="text-xs text-amber-700 font-medium">Free plan</p>
-            <Link href="/settings#subscription" className="text-xs text-amber-600 hover:underline">
+          <div className="mb-2 px-3 py-2 bg-secondary rounded-md">
+            <p className="text-xs text-foreground font-medium">Free plan</p>
+            <Link href="/settings#subscription" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
               Upgrade for more
             </Link>
           </div>
         )}
 
-        <div className="flex items-center gap-3 px-2 py-2">
-          <Avatar className="h-8 w-8">
+        <div className="flex items-center gap-2.5 px-2 py-1.5">
+          <Avatar className="h-7 w-7">
             <AvatarImage src={profile.logoUrl ?? undefined} />
-            <AvatarFallback className="bg-indigo-100 text-indigo-700 text-xs">
+            <AvatarFallback className="bg-secondary text-foreground text-xs font-medium">
               {getInitials(profile.fullName ?? profile.officeName ?? 'A')}
             </AvatarFallback>
           </Avatar>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-slate-900 truncate">
+            <p className="text-sm font-medium text-foreground truncate leading-tight">
               {profile.fullName ?? 'Advocate'}
             </p>
-            <p className="text-xs text-slate-500 truncate">
+            <p className="text-xs text-muted-foreground truncate leading-tight">
               {profile.officeName ?? 'My Office'}
             </p>
           </div>
           <button
             onClick={() => signOut({ callbackUrl: '/login' })}
-            className="text-slate-400 hover:text-slate-700 transition-colors"
+            className="text-muted-foreground hover:text-foreground transition-colors p-1 rounded-sm hover:bg-secondary"
             title="Sign out"
           >
-            <LogOut size={16} />
+            <LogOut size={14} />
           </button>
         </div>
       </div>

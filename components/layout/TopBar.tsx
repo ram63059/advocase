@@ -39,19 +39,19 @@ export function TopBar({ profile }: TopBarProps) {
   }
 
   return (
-    <header className="h-16 bg-white border-b border-slate-200 flex items-center px-4 md:px-6 gap-4 shrink-0">
+    <header className="h-14 bg-card border-b border-border flex items-center px-4 md:px-5 gap-3 shrink-0">
       {/* Page title (mobile only) */}
-      <h1 className="text-lg font-semibold text-slate-900 md:hidden">
+      <h1 className="text-base font-semibold text-foreground md:hidden">
         {getPageTitle(pathname)}
       </h1>
 
       {/* Quick search (desktop only) */}
-      <div className="hidden md:flex flex-1 max-w-md">
+      <div className="hidden md:flex flex-1 max-w-sm">
         <div className="relative w-full">
-          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
           <Input
             placeholder="Search cases, clients..."
-            className="pl-9 h-9 bg-slate-50 border-slate-200 cursor-pointer"
+            className="pl-8 h-8 text-sm bg-secondary border-transparent focus:border-border focus:bg-background cursor-pointer"
             onFocus={() => router.push('/search')}
             readOnly
           />
@@ -63,12 +63,12 @@ export function TopBar({ profile }: TopBarProps) {
       {/* Quick add dropdown */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button size="sm" className="gap-1">
-            <Plus size={16} />
+          <Button size="sm" className="h-8 gap-1.5 text-xs px-3">
+            <Plus size={13} />
             <span className="hidden md:inline">Add</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
+        <DropdownMenuContent align="end" className="w-40">
           <DropdownMenuItem onClick={() => router.push('/cases/new')}>
             New Case
           </DropdownMenuItem>
@@ -81,9 +81,9 @@ export function TopBar({ profile }: TopBarProps) {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      {/* Notifications placeholder */}
-      <button className="relative p-2 rounded-md text-slate-500 hover:bg-slate-100 transition-colors">
-        <Bell size={18} />
+      {/* Notifications */}
+      <button className="relative p-1.5 rounded-md text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors">
+        <Bell size={16} />
       </button>
     </header>
   )

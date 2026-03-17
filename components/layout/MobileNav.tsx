@@ -23,7 +23,7 @@ export function MobileNav() {
   }
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 z-50">
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-card border-t border-border z-50">
       <div className="flex">
         {mobileNavItems.map((item) => {
           const active = isActive(item.href)
@@ -32,14 +32,12 @@ export function MobileNav() {
               key={item.href}
               href={item.href}
               className={cn(
-                'flex-1 flex flex-col items-center py-2 gap-0.5 text-xs transition-colors',
-                active ? 'text-indigo-600' : 'text-slate-500'
+                'flex-1 flex flex-col items-center py-2.5 gap-0.5 text-[10px] font-medium transition-colors',
+                active ? 'text-foreground' : 'text-muted-foreground'
               )}
             >
-              <item.icon size={20} strokeWidth={active ? 2 : 1.5} />
-              <span className={cn('font-medium', active && 'font-semibold')}>
-                {item.label}
-              </span>
+              <item.icon size={19} strokeWidth={active ? 2 : 1.5} />
+              <span>{item.label}</span>
             </Link>
           )
         })}
