@@ -18,21 +18,21 @@ export function PageHeader({ title, description, actions, breadcrumb }: PageHead
           <div className="flex items-center gap-1 mb-1">
             {breadcrumb.map((item, i) => (
               <span key={i} className="flex items-center gap-1">
-                {i > 0 && <ChevronRight size={14} className="text-slate-400" />}
+                {i > 0 && <ChevronRight size={13} className="text-muted-foreground" />}
                 {item.href ? (
-                  <Link href={item.href} className="text-sm text-slate-500 hover:text-slate-700">
+                  <Link href={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                     {item.label}
                   </Link>
                 ) : (
-                  <span className="text-sm text-slate-500">{item.label}</span>
+                  <span className="text-sm text-muted-foreground">{item.label}</span>
                 )}
               </span>
             ))}
           </div>
         )}
-        <h1 className="text-2xl font-semibold text-slate-900">{title}</h1>
+        <h1 className="text-xl font-semibold text-foreground">{title}</h1>
         {description && (
-          <p className="text-sm text-slate-500 mt-0.5">{description}</p>
+          <p className="text-sm text-muted-foreground mt-0.5">{description}</p>
         )}
       </div>
       {actions && <div className="flex items-center gap-2">{actions}</div>}
