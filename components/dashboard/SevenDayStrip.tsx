@@ -7,9 +7,9 @@ interface DayCount { date: Date; count: number }
 
 export function SevenDayStrip({ days }: { days: DayCount[] }) {
   return (
-    <div className="bg-white rounded-lg border border-slate-200 p-5">
-      <h2 className="font-semibold text-slate-900 mb-4">Next 7 Days</h2>
-      <div className="grid grid-cols-7 gap-2">
+    <div className="bg-card rounded-xl border border-border p-5">
+      <h2 className="font-semibold text-foreground text-sm mb-4">Next 7 Days</h2>
+      <div className="grid grid-cols-7 gap-1.5">
         {days.map(({ date, count }, i) => {
           const today = isToday(date)
           const dateStr = format(date, 'yyyy-MM-dd')
@@ -19,19 +19,29 @@ export function SevenDayStrip({ days }: { days: DayCount[] }) {
               href={`/cases?date=${dateStr}`}
               className={cn(
                 'flex flex-col items-center p-2 rounded-lg transition-colors',
-                today ? 'bg-indigo-600' : count > 0 ? 'bg-indigo-50 hover:bg-indigo-100' : 'bg-slate-50 hover:bg-slate-100'
+                today
+                  ? 'bg-foreground'
+                  : count > 0
+                  ? 'bg-secondary hover:bg-secondary/70'
+                  : 'hover:bg-secondary'
               )}
             >
-              <span className={cn('text-xs font-medium', today ? 'text-indigo-200' : 'text-slate-500')}>
+              <span className={cn(
+                'text-[10px] font-medium uppercase tracking-wide',
+                today ? 'text-background/60' : 'text-muted-foreground'
+              )}>
                 {format(date, 'EEE')}
               </span>
-              <span className={cn('text-lg font-bold mt-0.5', today ? 'text-white' : 'text-slate-900')}>
+              <span className={cn(
+                'text-base font-semibold mt-0.5',
+                today ? 'text-background' : 'text-foreground'
+              )}>
                 {format(date, 'd')}
               </span>
               {count > 0 && (
                 <span className={cn(
-                  'text-xs font-medium mt-1 w-5 h-5 rounded-full flex items-center justify-center',
-                  today ? 'bg-indigo-500 text-white' : 'bg-indigo-600 text-white'
+                  'text-[10px] font-semibold mt-1 w-4 h-4 rounded-full flex items-center justify-center',
+                  today ? 'bg-background/20 text-background' : 'bg-foreground text-background'
                 )}>
                   {count > 9 ? '9+' : count}
                 </span>

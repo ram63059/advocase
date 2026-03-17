@@ -106,10 +106,10 @@ export default async function DashboardPage() {
     <div className="space-y-6 max-w-7xl mx-auto">
       {/* Greeting */}
       <div>
-        <h1 className="text-2xl font-semibold text-slate-900">
+        <h1 className="text-xl font-semibold text-foreground">
           Good {getGreeting()}, {userName}
         </h1>
-        <p className="text-sm text-slate-500 mt-0.5">
+        <p className="text-sm text-muted-foreground mt-0.5">
           {format(today, 'EEEE, dd MMMM yyyy')}
         </p>
       </div>
@@ -117,20 +117,20 @@ export default async function DashboardPage() {
       {/* Stats row */}
       <DashboardStats stats={stats} />
 
+      {/* Quick actions */}
+      <QuickActions />
+
       {/* Today's hearings */}
       <TodayHearings cases={todayCases} />
 
       {/* 7-day strip + purpose chart */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         <SevenDayStrip days={sevenDayCounts} />
         <PurposeChart data={purposeBreakdown.map(p => ({
           label: p.fixedFor ?? 'Unknown',
           count: p._count.id
         }))} />
       </div>
-
-      {/* Quick actions */}
-      <QuickActions />
 
       {/* Registered courts */}
       <RegisteredCourts courts={registeredCourts} />

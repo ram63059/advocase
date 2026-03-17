@@ -37,12 +37,12 @@ export function RegisteredCourts({ courts }: { courts: CourtRegisteredItem[] }) 
   }
 
   return (
-    <div className="bg-white rounded-lg border border-slate-200">
-      <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100">
-        <h2 className="font-semibold text-slate-900">Registered Courts</h2>
-        <Button variant="outline" size="sm" asChild>
+    <div className="bg-card rounded-xl border border-border">
+      <div className="flex items-center justify-between px-5 py-4 border-b border-border">
+        <h2 className="font-semibold text-foreground text-sm">Registered Courts</h2>
+        <Button variant="outline" size="sm" asChild className="h-7 text-xs">
           <Link href="/settings#courts">
-            <Plus size={14} className="mr-1" />
+            <Plus size={12} className="mr-1" />
             Add Court
           </Link>
         </Button>
@@ -50,20 +50,20 @@ export function RegisteredCourts({ courts }: { courts: CourtRegisteredItem[] }) 
 
       {courts.length === 0 ? (
         <div className="px-5 py-8 text-center">
-          <p className="text-sm text-slate-500">No courts registered yet.</p>
+          <p className="text-sm text-muted-foreground">No courts registered yet.</p>
           <Button size="sm" className="mt-3" asChild>
             <Link href="/settings#courts">Register a court for auto-sync</Link>
           </Button>
         </div>
       ) : (
-        <div className="divide-y divide-slate-100">
+        <div className="divide-y divide-border">
           {courts.map((court) => (
             <div key={court.id} className="flex items-center justify-between px-5 py-3">
               <div>
-                <p className="text-sm font-medium text-slate-900">
+                <p className="text-sm font-medium text-foreground">
                   {court.establishment ?? court.courtComplex ?? court.courtType}
                 </p>
-                <p className="text-xs text-slate-500 mt-0.5">
+                <p className="text-xs text-muted-foreground mt-0.5">
                   {court.state} &bull; Last synced: {court.lastSyncedAt ? formatDate(court.lastSyncedAt) : 'Never'}
                 </p>
               </div>
@@ -72,9 +72,9 @@ export function RegisteredCourts({ courts }: { courts: CourtRegisteredItem[] }) 
                 size="sm"
                 onClick={() => handleSync(court.id)}
                 disabled={syncing === court.id}
-                className="gap-1 text-slate-600"
+                className="gap-1.5 h-7 text-xs text-muted-foreground hover:text-foreground"
               >
-                <RefreshCw size={14} className={syncing === court.id ? 'animate-spin' : ''} />
+                <RefreshCw size={13} className={syncing === court.id ? 'animate-spin' : ''} />
                 {syncing === court.id ? 'Syncing...' : 'Sync'}
               </Button>
             </div>

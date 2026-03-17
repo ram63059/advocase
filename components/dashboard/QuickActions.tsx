@@ -5,24 +5,24 @@ import { Button } from '@/components/ui/button'
 
 export function QuickActions() {
   return (
-    <div className="flex flex-wrap gap-3">
-      <Button asChild>
+    <div className="flex flex-wrap gap-2">
+      <Button asChild size="sm">
         <Link href="/cases/new">
-          <Plus size={16} className="mr-2" />
+          <Plus size={14} className="mr-1.5" />
           Add Case
         </Link>
       </Button>
-      <Button variant="outline" asChild>
+      <Button variant="outline" size="sm" asChild>
         <Link href="/cases/new?import=ecourts">
-          <Download size={16} className="mr-2" />
+          <Download size={14} className="mr-1.5" />
           Import from eCourts
         </Link>
       </Button>
-      <Button variant="outline" onClick={() => {
+      <Button variant="outline" size="sm" onClick={() => {
         window.open(`/api/export/daily-board?date=${new Date().toISOString().split('T')[0]}`, '_blank')
       }}>
-        <FileText size={16} className="mr-2" />
-        Get Daily Board
+        <FileText size={14} className="mr-1.5" />
+        Daily Board
       </Button>
     </div>
   )
