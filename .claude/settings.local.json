@@ -10,7 +10,22 @@
       "Bash(git add:*)",
       "Bash(mkdir:*)",
       "Bash(cat:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(node -e \"console.log\\(require\\(''crypto''\\).randomBytes\\(32\\).toString\\(''hex''\\)\\)\")",
+      "Bash(grep -r \"useMemo\\\\|useCallback\" /c/Users/SRIRAM/coding/advocase/app --include=*.tsx --exclude-dir=node_modules)",
+      "Bash(grep -r useState /c/Users/SRIRAM/coding/advocase/app --include=*.tsx --exclude-dir=node_modules)",
+      "Bash(grep -r \"lazy\\\\|dynamic\\\\|React.memo\" /c/Users/SRIRAM/coding/advocase --include=*.tsx --include=*.ts --exclude-dir=node_modules)",
+      "Bash(grep -r \"getServerSideProps\\\\|getStaticProps\\\\|getStaticPaths\" /c/Users/SRIRAM/coding/advocase/app --include=*.tsx --exclude-dir=node_modules)",
+      "Bash(grep -r \"fetch\\\\|axios\" /c/Users/SRIRAM/coding/advocase/components --include=*.tsx --exclude-dir=node_modules)",
+      "Bash(grep -r \"useQuery\\\\|useMutation\" /c/Users/SRIRAM/coding/advocase --include=*.tsx --include=*.ts --exclude-dir=node_modules)",
+      "Bash(grep -r \"Image\\\\|<img\" /c/Users/SRIRAM/coding/advocase/components --include=*.tsx --exclude-dir=node_modules)",
+      "Bash(grep -r 'select: {' /c/Users/SRIRAM/coding/advocase/app/api --include=*.ts --exclude-dir=node_modules)",
+      "Bash(grep -r \"Script\\\\|script\" /c/Users/SRIRAM/coding/advocase/app --include=*.tsx --exclude-dir=node_modules)",
+      "Bash(grep -r \"React\\\\.lazy\\\\|dynamic\\(\" /c/Users/SRIRAM/coding/advocase --include=*.tsx --include=*.ts --exclude-dir=node_modules)",
+      "Bash(grep -A5 'export async function GET' /c/Users/SRIRAM/coding/advocase/app/api/cases/[id]/route.ts)",
+      "Bash(grep -r \"setInterval\\\\|setInterval\" /c/Users/SRIRAM/coding/advocase --include=*.tsx --exclude-dir=node_modules)",
+      "Bash(grep -r console.log /c/Users/SRIRAM/coding/advocase --include=*.tsx --include=*.ts --exclude-dir=node_modules)",
+      "Bash(npm uninstall:*)"
     ]
   }
 }
