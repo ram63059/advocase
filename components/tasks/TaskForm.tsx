@@ -126,7 +126,7 @@ export function TaskForm({ defaultValues, teamMembers, onSuccess, onCancel }: Ta
           className="mt-1"
         />
         {errors.title && (
-          <p className="text-xs text-red-500 mt-1">{errors.title.message}</p>
+          <p className="text-xs text-destructive mt-1">{errors.title.message}</p>
         )}
       </div>
 
@@ -228,14 +228,14 @@ export function TaskForm({ defaultValues, teamMembers, onSuccess, onCancel }: Ta
       <div>
         <Label>Link Case (optional)</Label>
         {selectedCase ? (
-          <div className="mt-1 flex items-center justify-between p-2.5 bg-indigo-50 rounded-md text-sm border border-indigo-100">
-            <span className="text-indigo-700 truncate">
+          <div className="mt-1 flex items-center justify-between p-2.5 bg-secondary rounded-xl text-sm border border-border">
+            <span className="text-foreground truncate">
               {selectedCase.caseNumber ?? 'Case'} — {selectedCase.firstParty}
             </span>
             <button
               type="button"
               onClick={() => setSelectedCase(null)}
-              className="text-indigo-400 hover:text-indigo-700 ml-2 shrink-0 text-base leading-none"
+              className="text-muted-foreground hover:text-foreground ml-2 shrink-0 text-base leading-none"
             >
               &times;
             </button>
@@ -251,12 +251,12 @@ export function TaskForm({ defaultValues, teamMembers, onSuccess, onCancel }: Ta
               }}
             />
             {caseResults.length > 0 && (
-              <div className="absolute z-20 w-full bg-white border border-slate-200 rounded-md shadow-lg mt-1 max-h-48 overflow-y-auto">
+              <div className="absolute z-20 w-full bg-card border border-border rounded-xl shadow-lg mt-1 max-h-48 overflow-y-auto">
                 {caseResults.map((c: any) => (
                   <button
                     key={c.id}
                     type="button"
-                    className="w-full text-left px-3 py-2 text-sm hover:bg-slate-50 border-b border-slate-100 last:border-0"
+                    className="w-full text-left px-3 py-2 text-sm hover:bg-secondary border-b border-border last:border-0"
                     onClick={() => {
                       setSelectedCase(c)
                       setCaseResults([])
@@ -277,12 +277,12 @@ export function TaskForm({ defaultValues, teamMembers, onSuccess, onCancel }: Ta
       <div>
         <Label>Link Client (optional)</Label>
         {selectedClient ? (
-          <div className="mt-1 flex items-center justify-between p-2.5 bg-indigo-50 rounded-md text-sm border border-indigo-100">
-            <span className="text-indigo-700">{selectedClient.fullName}</span>
+          <div className="mt-1 flex items-center justify-between p-2.5 bg-secondary rounded-xl text-sm border border-border">
+            <span className="text-foreground">{selectedClient.fullName}</span>
             <button
               type="button"
               onClick={() => setSelectedClient(null)}
-              className="text-indigo-400 hover:text-indigo-700 ml-2 shrink-0 text-base leading-none"
+              className="text-muted-foreground hover:text-foreground ml-2 shrink-0 text-base leading-none"
             >
               &times;
             </button>
@@ -298,12 +298,12 @@ export function TaskForm({ defaultValues, teamMembers, onSuccess, onCancel }: Ta
               }}
             />
             {clientResults.length > 0 && (
-              <div className="absolute z-20 w-full bg-white border border-slate-200 rounded-md shadow-lg mt-1 max-h-48 overflow-y-auto">
+              <div className="absolute z-20 w-full bg-card border border-border rounded-xl shadow-lg mt-1 max-h-48 overflow-y-auto">
                 {clientResults.map((c: any) => (
                   <button
                     key={c.id}
                     type="button"
-                    className="w-full text-left px-3 py-2 text-sm hover:bg-slate-50 border-b border-slate-100 last:border-0"
+                    className="w-full text-left px-3 py-2 text-sm hover:bg-secondary border-b border-border last:border-0"
                     onClick={() => {
                       setSelectedClient(c)
                       setClientResults([])
@@ -327,7 +327,7 @@ export function TaskForm({ defaultValues, teamMembers, onSuccess, onCancel }: Ta
             type="button"
             onClick={handleDelete}
             disabled={deleting}
-            className="text-xs text-red-500 hover:text-red-700 disabled:opacity-50"
+            className="text-xs text-destructive hover:text-red-700 disabled:opacity-50"
           >
             {deleting ? 'Deleting...' : 'Delete task'}
           </button>
