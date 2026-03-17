@@ -9,6 +9,7 @@ import { CaseTable } from './CaseTable'
 import { CaseFilters } from './CaseFilters'
 import { ExportButton } from '@/components/shared/ExportButton'
 import { EmptyState } from '@/components/shared/EmptyState'
+import { cn } from '@/lib/utils'
 import Link from 'next/link'
 
 interface CaseItem {
@@ -68,11 +69,9 @@ export function CasesPageClient({ cases, total, totalPages, currentPage, searchP
 
   const navigateWithParams = (updates: Record<string, string | undefined>) => {
     const params = new URLSearchParams()
-    // Carry over existing params
     Object.entries(searchParams).forEach(([key, value]) => {
       if (value !== undefined) params.set(key, value)
     })
-    // Apply updates
     Object.entries(updates).forEach(([key, value]) => {
       if (value === undefined) params.delete(key)
       else params.set(key, value)
@@ -91,32 +90,33 @@ export function CasesPageClient({ cases, total, totalPages, currentPage, searchP
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       {/* Page header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-slate-900">Cases</h1>
-          <p className="text-sm text-slate-500">{total} total cases</p>
+          <h1 className="text-xl font-semibold text-foreground">Cases</h1>
+          <p className="text-sm text-muted-foreground">{total} total cases</p>
         </div>
-        <Button asChild>
+        <Button asChild size="sm">
           <Link href="/cases/new">
-            <Plus size={16} className="mr-2" />
+            <Plus size={14} className="mr-1.5" />
             Add Case
           </Link>
         </Button>
       </div>
 
       {/* Tab bar */}
-      <div className="flex gap-1 overflow-x-auto pb-1 border-b border-slate-200">
+      <div className="flex gap-0.5 overflow-x-auto border-b border-border">
         {TABS.map((tab) => (
           <button
             key={tab.label}
             onClick={() => handleTabChange(tab.value)}
-            className={`px-4 py-2 text-sm font-medium rounded-t-md whitespace-nowrap transition-colors ${
+            className={cn(
+              'px-3.5 py-2 text-sm font-medium whitespace-nowrap transition-colors border-b-2 -mb-px',
               activeFilter === tab.value
-                ? 'text-indigo-700 border-b-2 border-indigo-600 -mb-px bg-white'
-                : 'text-slate-600 hover:text-slate-900'
-            }`}
+                ? 'text-foreground border-foreground'
+                : 'text-muted-foreground border-transparent hover:text-foreground'
+            )}
           >
             {tab.label}
           </button>
@@ -124,48 +124,43 @@ export function CasesPageClient({ cases, total, totalPages, currentPage, searchP
       </div>
 
       {/* Toolbar */}
-      <div className="flex items-center gap-3 flex-wrap">
+      <div className="flex items-center gap-2 flex-wrap">
         <form onSubmit={handleSearch} className="flex-1 flex gap-2 min-w-0">
-          <div className="relative flex-1 max-w-md">
-            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+          <div className="relative flex-1 max-w-sm">
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
             <Input
               placeholder="Search by name, case no., CNR..."
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
-              className="pl-9"
+              className="pl-8 h-8 text-sm"
             />
           </div>
-          <Button type="submit" variant="secondary" size="sm" disabled={isPending}>
+          <Button type="submit" variant="secondary" size="sm" className="h-8" disabled={isPending}>
             Search
           </Button>
         </form>
 
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => setFiltersOpen(true)}
-          className="gap-1"
-        >
-          <Filter size={14} />
+        <Button variant="outline" size="sm" className="h-8" onClick={() => setFiltersOpen(true)}>
+          <Filter size={13} className="mr-1.5" />
           Filters
         </Button>
 
         <ExportButton type="cases" filters={searchParams} />
 
-        <div className="hidden md:flex border border-slate-200 rounded-md">
+        <div className="hidden md:flex border border-border rounded-md overflow-hidden">
           <button
             onClick={() => setView('list')}
-            className={`p-2 rounded-l-md transition-colors ${view === 'list' ? 'bg-slate-100' : 'hover:bg-slate-50'}`}
+            className={cn('p-1.5 transition-colors', view === 'list' ? 'bg-secondary text-foreground' : 'text-muted-foreground hover:bg-secondary/50')}
             title="List view"
           >
-            <List size={16} />
+            <List size={15} />
           </button>
           <button
             onClick={() => setView('table')}
-            className={`p-2 rounded-r-md transition-colors ${view === 'table' ? 'bg-slate-100' : 'hover:bg-slate-50'}`}
+            className={cn('p-1.5 transition-colors border-l border-border', view === 'table' ? 'bg-secondary text-foreground' : 'text-muted-foreground hover:bg-secondary/50')}
             title="Table view"
           >
-            <Table2 size={16} />
+            <Table2 size={15} />
           </button>
         </div>
       </div>
@@ -179,7 +174,7 @@ export function CasesPageClient({ cases, total, totalPages, currentPage, searchP
           action={{ label: 'Add Case', href: '/cases/new' }}
         />
       ) : view === 'list' ? (
-        <div className="space-y-3">
+        <div className="space-y-2">
           {cases.map((c) => <CaseCard key={c.id} case={c} />)}
         </div>
       ) : (
@@ -188,7 +183,7 @@ export function CasesPageClient({ cases, total, totalPages, currentPage, searchP
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-2 pt-4">
+        <div className="flex items-center justify-center gap-2 pt-2">
           <Button
             variant="outline"
             size="sm"
@@ -197,7 +192,7 @@ export function CasesPageClient({ cases, total, totalPages, currentPage, searchP
           >
             Previous
           </Button>
-          <span className="text-sm text-slate-600">
+          <span className="text-sm text-muted-foreground">
             Page {currentPage} of {totalPages}
           </span>
           <Button
@@ -211,7 +206,6 @@ export function CasesPageClient({ cases, total, totalPages, currentPage, searchP
         </div>
       )}
 
-      {/* Filters slide-over */}
       <CaseFilters
         open={filtersOpen}
         onClose={() => setFiltersOpen(false)}

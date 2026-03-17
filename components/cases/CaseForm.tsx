@@ -158,8 +158,8 @@ export function CaseForm({ initialData, caseId }: CaseFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       {/* Court Information */}
-      <div className="bg-white rounded-lg border border-slate-200 p-5">
-        <h2 className="font-semibold text-slate-900 mb-4">Court Information</h2>
+      <div className="bg-card rounded-xl border border-border p-5">
+        <h2 className="font-semibold text-foreground mb-4">Court Information</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-1">
             <Label>Court Type</Label>
@@ -202,12 +202,12 @@ export function CaseForm({ initialData, caseId }: CaseFormProps) {
       </div>
 
       {/* Case Identifiers */}
-      <div className="bg-white rounded-lg border border-slate-200 p-5">
-        <h2 className="font-semibold text-slate-900 mb-4">Case Identifiers</h2>
+      <div className="bg-card rounded-xl border border-border p-5">
+        <h2 className="font-semibold text-foreground mb-4">Case Identifiers</h2>
 
         {/* CNR Auto-fill */}
-        <div className="mb-4 p-3 bg-indigo-50 rounded-md">
-          <p className="text-xs text-indigo-600 font-medium mb-2">Auto-fill from eCourts using CNR</p>
+        <div className="mb-4 p-3 bg-secondary/50 rounded-xl border border-border">
+          <p className="text-xs text-muted-foreground font-medium mb-2">Auto-fill from eCourts using CNR</p>
           <div className="flex gap-2">
             <Input
               placeholder="Enter CNR Number (e.g. TGHC010012345672024)"
@@ -251,8 +251,8 @@ export function CaseForm({ initialData, caseId }: CaseFormProps) {
       </div>
 
       {/* Parties */}
-      <div className="bg-white rounded-lg border border-slate-200 p-5">
-        <h2 className="font-semibold text-slate-900 mb-4">Parties</h2>
+      <div className="bg-card rounded-xl border border-border p-5">
+        <h2 className="font-semibold text-foreground mb-4">Parties</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-1">
             <Label>First Party (Petitioner / Appellant)</Label>
@@ -266,8 +266,8 @@ export function CaseForm({ initialData, caseId }: CaseFormProps) {
       </div>
 
       {/* Case Details */}
-      <div className="bg-white rounded-lg border border-slate-200 p-5">
-        <h2 className="font-semibold text-slate-900 mb-4">Case Details</h2>
+      <div className="bg-card rounded-xl border border-border p-5">
+        <h2 className="font-semibold text-foreground mb-4">Case Details</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-1">
             <Label>Case Type</Label>
@@ -297,8 +297,8 @@ export function CaseForm({ initialData, caseId }: CaseFormProps) {
       </div>
 
       {/* Dates & Status */}
-      <div className="bg-white rounded-lg border border-slate-200 p-5">
-        <h2 className="font-semibold text-slate-900 mb-4">Dates & Status</h2>
+      <div className="bg-card rounded-xl border border-border p-5">
+        <h2 className="font-semibold text-foreground mb-4">Dates & Status</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-1">
             <Label>Filing Date</Label>
@@ -364,8 +364,8 @@ export function CaseForm({ initialData, caseId }: CaseFormProps) {
       </div>
 
       {/* Notes */}
-      <div className="bg-white rounded-lg border border-slate-200 p-5">
-        <h2 className="font-semibold text-slate-900 mb-4">Brief Facts & Notes</h2>
+      <div className="bg-card rounded-xl border border-border p-5">
+        <h2 className="font-semibold text-foreground mb-4">Brief Facts & Notes</h2>
         <div className="space-y-4">
           <div className="space-y-1">
             <Label>Brief Facts</Label>

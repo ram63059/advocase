@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
 import { CaseStatusBadge } from './CaseStatusBadge'
 import { formatDate, formatCurrency } from '@/lib/utils'
+import { cn } from '@/lib/utils'
 import type { Case, CaseHistory, CaseOrder, CaseNote, CaseDocument, CaseClient, Client, Fee, OpposeCounsel, Reminder, LinkedCase } from '@prisma/client'
 
 type CaseDataType = Case & {
@@ -72,24 +73,22 @@ export function CaseDetailClient({ caseData, profileId }: { caseData: CaseDataTy
     <div className="space-y-4 max-w-5xl mx-auto">
       {/* Header */}
       <div className="flex items-start justify-between gap-4 flex-wrap">
-        <div className="flex items-center gap-3">
-          <Button variant="ghost" size="sm" asChild>
-            <Link href="/cases">
-              <ArrowLeft size={16} />
-              Cases
-            </Link>
-          </Button>
-        </div>
+        <Button variant="ghost" size="sm" asChild className="text-muted-foreground hover:text-foreground">
+          <Link href="/cases">
+            <ArrowLeft size={15} className="mr-1" />
+            Cases
+          </Link>
+        </Button>
         <div className="flex items-center gap-2">
           {caseData.cnrNumber && (
             <Button variant="outline" size="sm" onClick={handleSync} disabled={syncing}>
-              <RefreshCw size={14} className={syncing ? 'animate-spin mr-2' : 'mr-2'} />
+              <RefreshCw size={13} className={cn('mr-1.5', syncing && 'animate-spin')} />
               Sync eCourts
             </Button>
           )}
           <Button asChild size="sm">
             <Link href={`/cases/${caseData.id}/edit`}>
-              <Pencil size={14} className="mr-2" />
+              <Pencil size={13} className="mr-1.5" />
               Edit Case
             </Link>
           </Button>
@@ -97,38 +96,38 @@ export function CaseDetailClient({ caseData, profileId }: { caseData: CaseDataTy
       </div>
 
       {/* Case title card */}
-      <div className="bg-white rounded-lg border border-slate-200 p-5">
+      <div className="bg-card rounded-xl border border-border p-5">
         <div className="flex items-start justify-between gap-4 flex-wrap">
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 flex-wrap mb-1">
+            <div className="flex items-center gap-2 flex-wrap mb-1.5">
               {caseData.courtType && (
-                <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700">
-                  {caseData.courtType.toUpperCase()}
+                <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-secondary text-muted-foreground uppercase tracking-wide">
+                  {caseData.courtType}
                 </span>
               )}
-              <span className="font-mono text-sm text-slate-600">
+              <span className="font-mono text-sm text-muted-foreground">
                 {caseData.caseNumber ?? 'No Number'}
                 {caseData.year ? ` / ${caseData.year}` : ''}
               </span>
               <CaseStatusBadge status={caseData.status} />
               {caseData.isImportant && (
-                <Star size={16} className="text-amber-500 fill-amber-500" />
+                <Star size={14} className="text-foreground/50 fill-foreground/20" />
               )}
             </div>
-            <h1 className="text-xl font-semibold text-slate-900 truncate">
+            <h1 className="text-lg font-semibold text-foreground truncate">
               {caseData.firstParty ?? '—'}{' '}
-              <span className="font-normal text-slate-400 text-lg">vs</span>{' '}
+              <span className="font-normal text-muted-foreground">vs</span>{' '}
               {caseData.oppositeParty ?? '—'}
             </h1>
-            <p className="text-sm text-slate-500 mt-1">{caseData.courtName}</p>
+            <p className="text-sm text-muted-foreground mt-0.5">{caseData.courtName}</p>
           </div>
           <div className="text-right shrink-0">
-            <div className="text-xs text-slate-500 mb-0.5">Next Hearing</div>
-            <div className="font-semibold text-slate-900">
+            <div className="text-xs text-muted-foreground mb-0.5">Next Hearing</div>
+            <div className="font-semibold text-foreground">
               {caseData.nextDate ? formatDate(caseData.nextDate) : 'Date Awaited'}
             </div>
             {caseData.fixedFor && (
-              <div className="text-xs text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full mt-1 inline-block">
+              <div className="text-xs text-muted-foreground bg-secondary px-2 py-0.5 rounded-full mt-1 inline-block">
                 {caseData.fixedFor}
               </div>
             )}
@@ -136,39 +135,40 @@ export function CaseDetailClient({ caseData, profileId }: { caseData: CaseDataTy
         </div>
 
         {/* Quick stats */}
-        <div className="grid grid-cols-4 gap-4 mt-5 pt-5 border-t border-slate-100">
+        <div className="grid grid-cols-4 gap-4 mt-5 pt-5 border-t border-border">
           <div className="text-center">
-            <p className="text-2xl font-bold text-slate-900">{caseData.history.length}</p>
-            <p className="text-xs text-slate-500">Hearings</p>
+            <p className="text-2xl font-semibold text-foreground">{caseData.history.length}</p>
+            <p className="text-xs text-muted-foreground">Hearings</p>
           </div>
           <div className="text-center">
-            <p className="text-2xl font-bold text-slate-900">{caseData.documents.length}</p>
-            <p className="text-xs text-slate-500">Documents</p>
+            <p className="text-2xl font-semibold text-foreground">{caseData.documents.length}</p>
+            <p className="text-xs text-muted-foreground">Documents</p>
           </div>
           <div className="text-center">
-            <p className="text-2xl font-bold text-slate-900">{caseData.notes.length}</p>
-            <p className="text-xs text-slate-500">Notes</p>
+            <p className="text-2xl font-semibold text-foreground">{caseData.notes.length}</p>
+            <p className="text-xs text-muted-foreground">Notes</p>
           </div>
           <div className="text-center">
-            <p className="text-2xl font-bold text-slate-900">{formatCurrency(totalFees)}</p>
-            <p className="text-xs text-slate-500">Fees</p>
+            <p className="text-2xl font-semibold text-foreground">{formatCurrency(totalFees)}</p>
+            <p className="text-xs text-muted-foreground">Fees</p>
           </div>
         </div>
       </div>
 
       {/* Section tabs */}
-      <div className="flex gap-1 overflow-x-auto pb-1 border-b border-slate-200">
+      <div className="flex gap-0.5 overflow-x-auto border-b border-border">
         {SECTIONS.map((section) => (
           <button
             key={section.id}
             onClick={() => setActiveSection(section.id)}
-            className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-t-md whitespace-nowrap transition-colors ${
+            className={cn(
+              'flex items-center gap-1.5 px-3 py-2 text-sm font-medium whitespace-nowrap transition-colors border-b-2 -mb-px',
               activeSection === section.id
-                ? 'text-indigo-700 border-b-2 border-indigo-600 -mb-px bg-white'
-                : 'text-slate-600 hover:text-slate-900'
-            }`}
+                ? 'text-foreground border-foreground'
+                : 'text-muted-foreground border-transparent hover:text-foreground'
+            )}
           >
-            <section.icon size={14} />
+            <section.icon size={13} />
             {section.label}
           </button>
         ))}
@@ -183,10 +183,7 @@ export function CaseDetailClient({ caseData, profileId }: { caseData: CaseDataTy
         {activeSection === 'notes' && <NotesSection notes={caseData.notes} caseId={caseData.id} />}
         {activeSection === 'fees' && <FeesSection fees={caseData.fees} caseId={caseData.id} />}
         {activeSection === 'counsel' && (
-          <CounselSection
-            clients={caseData.clients}
-            counsel={caseData.oppositeCouns}
-          />
+          <CounselSection clients={caseData.clients} counsel={caseData.oppositeCouns} />
         )}
         {activeSection === 'reminders' && <RemindersSection reminders={caseData.reminders} caseId={caseData.id} />}
         {activeSection === 'linked' && (
@@ -196,6 +193,14 @@ export function CaseDetailClient({ caseData, profileId }: { caseData: CaseDataTy
     </div>
   )
 }
+
+const inlineInputClass = 'w-full border border-border rounded-md px-3 py-1.5 text-sm bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring/50 focus:border-ring'
+const inlineLabelClass = 'text-xs font-medium text-muted-foreground block mb-1'
+const sectionCardClass = 'bg-card rounded-xl border border-border'
+const sectionHeaderClass = 'flex items-center justify-between px-5 py-4 border-b border-border'
+const dividerClass = 'divide-y divide-border'
+const emptyTextClass = 'text-sm text-muted-foreground px-5 py-8 text-center'
+const addFormClass = 'px-5 py-4 border-b border-border bg-secondary/30 space-y-3'
 
 function OverviewSection({ c }: { c: CaseDataType }) {
   const fields = [
@@ -224,38 +229,38 @@ function OverviewSection({ c }: { c: CaseDataType }) {
   ]
 
   return (
-    <div className="space-y-6">
-      <div className="bg-white rounded-lg border border-slate-200 p-5">
-        <h3 className="font-semibold text-slate-900 mb-4">Case Details</h3>
+    <div className="space-y-5">
+      <div className={sectionCardClass + ' p-5'}>
+        <h3 className="font-semibold text-foreground text-sm mb-4">Case Details</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
           {fields.map(({ label, value }) => value ? (
             <div key={label} className="flex gap-2">
-              <span className="text-sm text-slate-500 w-36 shrink-0">{label}</span>
-              <span className="text-sm text-slate-900 font-medium">{value}</span>
+              <span className="text-sm text-muted-foreground w-36 shrink-0">{label}</span>
+              <span className="text-sm text-foreground font-medium">{value}</span>
             </div>
           ) : null)}
         </div>
       </div>
 
       {(c.briefFacts || c.relevantLaws || c.comments) && (
-        <div className="bg-white rounded-lg border border-slate-200 p-5">
-          <h3 className="font-semibold text-slate-900 mb-4">Notes & Background</h3>
+        <div className={sectionCardClass + ' p-5'}>
+          <h3 className="font-semibold text-foreground text-sm mb-4">Notes & Background</h3>
           {c.briefFacts && (
             <div className="mb-4">
-              <p className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-1">Brief Facts</p>
-              <p className="text-sm text-slate-700 whitespace-pre-wrap">{c.briefFacts}</p>
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">Brief Facts</p>
+              <p className="text-sm text-foreground whitespace-pre-wrap">{c.briefFacts}</p>
             </div>
           )}
           {c.relevantLaws && (
             <div className="mb-4">
-              <p className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-1">Relevant Laws</p>
-              <p className="text-sm text-slate-700 whitespace-pre-wrap">{c.relevantLaws}</p>
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">Relevant Laws</p>
+              <p className="text-sm text-foreground whitespace-pre-wrap">{c.relevantLaws}</p>
             </div>
           )}
           {c.comments && (
             <div>
-              <p className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-1">Comments</p>
-              <p className="text-sm text-slate-700 whitespace-pre-wrap">{c.comments}</p>
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">Comments</p>
+              <p className="text-sm text-foreground whitespace-pre-wrap">{c.comments}</p>
             </div>
           )}
         </div>
@@ -266,25 +271,25 @@ function OverviewSection({ c }: { c: CaseDataType }) {
 
 function HistorySection({ history }: { history: CaseHistory[] }) {
   return (
-    <div className="bg-white rounded-lg border border-slate-200">
-      <div className="px-5 py-4 border-b border-slate-100">
-        <h3 className="font-semibold text-slate-900">Hearing History ({history.length})</h3>
+    <div className={sectionCardClass}>
+      <div className={sectionHeaderClass}>
+        <h3 className="font-semibold text-foreground text-sm">Hearing History ({history.length})</h3>
       </div>
       {history.length === 0 ? (
-        <p className="text-sm text-slate-500 px-5 py-8 text-center">No hearing history available.</p>
+        <p className={emptyTextClass}>No hearing history available.</p>
       ) : (
-        <div className="divide-y divide-slate-100">
+        <div className={dividerClass}>
           {history.map((h) => (
             <div key={h.id} className="px-5 py-3 flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-slate-900">
+                <p className="text-sm font-medium text-foreground">
                   {h.hearingDate ? formatDate(h.hearingDate) : '—'}
                 </p>
-                {h.purpose && <p className="text-xs text-slate-500">{h.purpose}</p>}
-                {h.judge && <p className="text-xs text-slate-400">Judge: {h.judge}</p>}
+                {h.purpose && <p className="text-xs text-muted-foreground">{h.purpose}</p>}
+                {h.judge && <p className="text-xs text-muted-foreground/60">Judge: {h.judge}</p>}
               </div>
               {h.businessOnDate && (
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-muted-foreground">
                   Business on {formatDate(h.businessOnDate)}
                 </p>
               )}
@@ -319,76 +324,61 @@ function OrdersSection({ orders, caseId }: { orders: CaseOrder[]; caseId: string
   }
 
   return (
-    <div className="bg-white rounded-lg border border-slate-200">
-      <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100">
-        <h3 className="font-semibold text-slate-900">Orders ({orders.length})</h3>
-        <Button size="sm" variant="outline" onClick={() => setAdding(!adding)}>
+    <div className={sectionCardClass}>
+      <div className={sectionHeaderClass}>
+        <h3 className="font-semibold text-foreground text-sm">Orders ({orders.length})</h3>
+        <Button size="sm" variant="outline" className="h-7 text-xs" onClick={() => setAdding(!adding)}>
           {adding ? 'Cancel' : 'Add Order'}
         </Button>
       </div>
       {adding && (
-        <div className="px-5 py-4 border-b border-slate-100 bg-slate-50 space-y-3">
+        <div className={addFormClass}>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-xs font-medium text-slate-500 block mb-1">Order Type</label>
-              <input
-                className="w-full border border-slate-200 rounded px-3 py-1.5 text-sm"
-                placeholder="Interim / Final"
-                value={form.orderType}
-                onChange={e => setForm({ ...form, orderType: e.target.value })}
-              />
+              <label className={inlineLabelClass}>Order Type</label>
+              <input className={inlineInputClass} placeholder="Interim / Final"
+                value={form.orderType} onChange={e => setForm({ ...form, orderType: e.target.value })} />
             </div>
             <div>
-              <label className="text-xs font-medium text-slate-500 block mb-1">Order Date</label>
-              <input
-                type="date"
-                className="w-full border border-slate-200 rounded px-3 py-1.5 text-sm"
-                value={form.orderDate}
-                onChange={e => setForm({ ...form, orderDate: e.target.value })}
-              />
+              <label className={inlineLabelClass}>Order Date</label>
+              <input type="date" className={inlineInputClass}
+                value={form.orderDate} onChange={e => setForm({ ...form, orderDate: e.target.value })} />
             </div>
           </div>
           <div>
-            <label className="text-xs font-medium text-slate-500 block mb-1">Description</label>
-            <textarea
-              className="w-full border border-slate-200 rounded px-3 py-1.5 text-sm min-h-[60px]"
-              value={form.description}
-              onChange={e => setForm({ ...form, description: e.target.value })}
-            />
+            <label className={inlineLabelClass}>Description</label>
+            <textarea className={inlineInputClass + ' min-h-[60px]'}
+              value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} />
           </div>
           <div>
-            <label className="text-xs font-medium text-slate-500 block mb-1">Order URL (optional)</label>
-            <input
-              className="w-full border border-slate-200 rounded px-3 py-1.5 text-sm"
-              placeholder="https://..."
-              value={form.orderUrl}
-              onChange={e => setForm({ ...form, orderUrl: e.target.value })}
-            />
+            <label className={inlineLabelClass}>Order URL (optional)</label>
+            <input className={inlineInputClass} placeholder="https://..."
+              value={form.orderUrl} onChange={e => setForm({ ...form, orderUrl: e.target.value })} />
           </div>
           <Button size="sm" onClick={handleAdd}>Save Order</Button>
         </div>
       )}
       {orders.length === 0 ? (
-        <p className="text-sm text-slate-500 px-5 py-8 text-center">No orders recorded.</p>
+        <p className={emptyTextClass}>No orders recorded.</p>
       ) : (
-        <div className="divide-y divide-slate-100">
+        <div className={dividerClass}>
           {orders.map((o) => (
             <div key={o.id} className="px-5 py-3">
               <div className="flex items-center justify-between">
                 <div>
-                  <span className="text-xs bg-slate-100 px-2 py-0.5 rounded-full mr-2">{o.orderType ?? 'Order'}</span>
-                  <span className="text-sm font-medium text-slate-900">
+                  <span className="text-xs bg-secondary text-muted-foreground px-2 py-0.5 rounded-full mr-2">{o.orderType ?? 'Order'}</span>
+                  <span className="text-sm font-medium text-foreground">
                     {o.orderDate ? formatDate(o.orderDate) : '—'}
                   </span>
                 </div>
                 {o.orderUrl && (
                   <a href={o.orderUrl} target="_blank" rel="noopener noreferrer"
-                    className="text-xs text-indigo-600 hover:underline">
+                    className="text-xs text-foreground hover:underline font-medium">
                     View Order
                   </a>
                 )}
               </div>
-              {o.description && <p className="text-sm text-slate-600 mt-1">{o.description}</p>}
+              {o.description && <p className="text-sm text-muted-foreground mt-1">{o.description}</p>}
             </div>
           ))}
         </div>
@@ -399,10 +389,10 @@ function OrdersSection({ orders, caseId }: { orders: CaseOrder[]; caseId: string
 
 function DocumentsSection({ documents, caseId }: { documents: CaseDocument[]; caseId: string }) {
   return (
-    <div className="bg-white rounded-lg border border-slate-200">
-      <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100">
-        <h3 className="font-semibold text-slate-900">Documents ({documents.length})</h3>
-        <Button size="sm" variant="outline" asChild>
+    <div className={sectionCardClass}>
+      <div className={sectionHeaderClass}>
+        <h3 className="font-semibold text-foreground text-sm">Documents ({documents.length})</h3>
+        <Button size="sm" variant="outline" className="h-7 text-xs" asChild>
           <label className="cursor-pointer">
             Upload Document
             <input type="file" className="hidden" multiple onChange={async (e) => {
@@ -411,10 +401,7 @@ function DocumentsSection({ documents, caseId }: { documents: CaseDocument[]; ca
               const formData = new FormData()
               Array.from(files).forEach(f => formData.append('files', f))
               try {
-                const res = await fetch(`/api/cases/${caseId}/documents`, {
-                  method: 'POST',
-                  body: formData,
-                })
+                const res = await fetch(`/api/cases/${caseId}/documents`, { method: 'POST', body: formData })
                 if (!res.ok) throw new Error()
                 toast.success('Document uploaded')
                 window.location.reload()
@@ -426,24 +413,19 @@ function DocumentsSection({ documents, caseId }: { documents: CaseDocument[]; ca
         </Button>
       </div>
       {documents.length === 0 ? (
-        <p className="text-sm text-slate-500 px-5 py-8 text-center">No documents uploaded.</p>
+        <p className={emptyTextClass}>No documents uploaded.</p>
       ) : (
-        <div className="divide-y divide-slate-100">
+        <div className={dividerClass}>
           {documents.map((d) => (
             <div key={d.id} className="flex items-center justify-between px-5 py-3">
               <div>
-                <p className="text-sm font-medium text-slate-900">{d.fileName}</p>
-                <p className="text-xs text-slate-500">
-                  {d.fileType} {d.fileSize ? `• ${Math.round(d.fileSize / 1024)}KB` : ''} •{' '}
-                  {formatDate(d.createdAt)}
+                <p className="text-sm font-medium text-foreground">{d.fileName}</p>
+                <p className="text-xs text-muted-foreground">
+                  {d.fileType} {d.fileSize ? `• ${Math.round(d.fileSize / 1024)}KB` : ''} • {formatDate(d.createdAt)}
                 </p>
               </div>
-              <a
-                href={d.fileUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs text-indigo-600 hover:underline"
-              >
+              <a href={d.fileUrl} target="_blank" rel="noopener noreferrer"
+                className="text-xs text-foreground hover:underline font-medium">
                 Download
               </a>
             </div>
@@ -480,47 +462,39 @@ function NotesSection({ notes, caseId }: { notes: CaseNote[]; caseId: string }) 
   }
 
   return (
-    <div className="bg-white rounded-lg border border-slate-200" id="notes">
-      <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100">
-        <h3 className="font-semibold text-slate-900">Notes ({notes.length})</h3>
-        <Button size="sm" variant="outline" onClick={() => setAdding(!adding)}>
+    <div className={sectionCardClass} id="notes">
+      <div className={sectionHeaderClass}>
+        <h3 className="font-semibold text-foreground text-sm">Notes ({notes.length})</h3>
+        <Button size="sm" variant="outline" className="h-7 text-xs" onClick={() => setAdding(!adding)}>
           {adding ? 'Cancel' : 'Add Note'}
         </Button>
       </div>
       {adding && (
-        <div className="px-5 py-4 border-b border-slate-100 bg-slate-50 space-y-3">
+        <div className={addFormClass}>
           <div>
-            <label className="text-xs font-medium text-slate-500 block mb-1">Purpose / Heading</label>
-            <input
-              className="w-full border border-slate-200 rounded px-3 py-1.5 text-sm"
-              placeholder="e.g. Arguments"
-              value={purpose}
-              onChange={e => setPurpose(e.target.value)}
-            />
+            <label className={inlineLabelClass}>Purpose / Heading</label>
+            <input className={inlineInputClass} placeholder="e.g. Arguments"
+              value={purpose} onChange={e => setPurpose(e.target.value)} />
           </div>
           <div>
-            <label className="text-xs font-medium text-slate-500 block mb-1">Note *</label>
-            <textarea
-              className="w-full border border-slate-200 rounded px-3 py-2 text-sm min-h-[100px]"
-              placeholder="Write your note here..."
-              value={noteText}
-              onChange={e => setNoteText(e.target.value)}
-            />
+            <label className={inlineLabelClass}>Note *</label>
+            <textarea className={inlineInputClass + ' min-h-[100px]'} placeholder="Write your note here..."
+              value={noteText} onChange={e => setNoteText(e.target.value)} />
           </div>
           <Button size="sm" onClick={handleAdd} disabled={!noteText.trim()}>Save Note</Button>
         </div>
       )}
       {notes.length === 0 ? (
-        <p className="text-sm text-slate-500 px-5 py-8 text-center">No notes yet.</p>
+        <p className={emptyTextClass}>No notes yet.</p>
       ) : (
-        <div className="divide-y divide-slate-100">
+        <div className={dividerClass}>
           {notes.map((n) => (
             <div key={n.id} className="px-5 py-4">
               <div className="flex items-center justify-between mb-1">
-                {n.purpose && <span className="text-xs font-medium text-indigo-600">{n.purpose}</span>}
-                <span className="text-xs text-slate-400 ml-auto">{formatDate(n.createdAt)}</span>
+                {n.purpose && <span className="text-xs font-medium text-foreground">{n.purpose}</span>}
+                <span className="text-xs text-muted-foreground ml-auto">{formatDate(n.createdAt)}</span>
               </div>
-              <p className="text-sm text-slate-700 whitespace-pre-wrap">{n.noteText}</p>
+              <p className="text-sm text-foreground whitespace-pre-wrap">{n.noteText}</p>
             </div>
           ))}
         </div>
@@ -562,94 +536,78 @@ function FeesSection({ fees, caseId }: { fees: Fee[]; caseId: string }) {
   }
 
   return (
-    <div className="bg-white rounded-lg border border-slate-200" id="fees">
-      <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100">
+    <div className={sectionCardClass} id="fees">
+      <div className={sectionHeaderClass}>
         <div>
-          <h3 className="font-semibold text-slate-900">Fees & Expenses</h3>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <h3 className="font-semibold text-foreground text-sm">Fees & Expenses</h3>
+          <p className="text-xs text-muted-foreground mt-0.5">
             Received: {formatCurrency(totalIncome)} | Expenses: {formatCurrency(totalExpense)}
           </p>
         </div>
-        <Button size="sm" variant="outline" onClick={() => setAdding(!adding)}>
+        <Button size="sm" variant="outline" className="h-7 text-xs" onClick={() => setAdding(!adding)}>
           {adding ? 'Cancel' : 'Add Entry'}
         </Button>
       </div>
       {adding && (
-        <div className="px-5 py-4 border-b border-slate-100 bg-slate-50 space-y-3">
+        <div className={addFormClass}>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-xs font-medium text-slate-500 block mb-1">Amount (INR) *</label>
-              <input
-                type="number"
-                className="w-full border border-slate-200 rounded px-3 py-1.5 text-sm"
-                placeholder="0.00"
-                value={form.amount}
-                onChange={e => setForm({ ...form, amount: e.target.value })}
-              />
+              <label className={inlineLabelClass}>Amount (INR) *</label>
+              <input type="number" className={inlineInputClass} placeholder="0.00"
+                value={form.amount} onChange={e => setForm({ ...form, amount: e.target.value })} />
             </div>
             <div>
-              <label className="text-xs font-medium text-slate-500 block mb-1">Date</label>
-              <input
-                type="date"
-                className="w-full border border-slate-200 rounded px-3 py-1.5 text-sm"
-                value={form.feeDate}
-                onChange={e => setForm({ ...form, feeDate: e.target.value })}
-              />
+              <label className={inlineLabelClass}>Date</label>
+              <input type="date" className={inlineInputClass}
+                value={form.feeDate} onChange={e => setForm({ ...form, feeDate: e.target.value })} />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-xs font-medium text-slate-500 block mb-1">Payment Mode</label>
-              <select
-                className="w-full border border-slate-200 rounded px-3 py-1.5 text-sm"
-                value={form.paymentMode}
-                onChange={e => setForm({ ...form, paymentMode: e.target.value })}
-              >
+              <label className={inlineLabelClass}>Payment Mode</label>
+              <select className={inlineInputClass} value={form.paymentMode}
+                onChange={e => setForm({ ...form, paymentMode: e.target.value })}>
                 {['Cash', 'UPI', 'Bank Transfer', 'Cheque'].map(m => (
                   <option key={m} value={m}>{m}</option>
                 ))}
               </select>
             </div>
-            <div className="flex items-end">
-              <label className="flex items-center gap-2 text-sm cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={form.isExpense}
-                  onChange={e => setForm({ ...form, isExpense: e.target.checked })}
-                />
+            <div className="flex items-end pb-1.5">
+              <label className="flex items-center gap-2 text-sm cursor-pointer text-foreground">
+                <input type="checkbox" checked={form.isExpense}
+                  onChange={e => setForm({ ...form, isExpense: e.target.checked })} />
                 Mark as Expense
               </label>
             </div>
           </div>
           <div>
-            <label className="text-xs font-medium text-slate-500 block mb-1">Description</label>
-            <input
-              className="w-full border border-slate-200 rounded px-3 py-1.5 text-sm"
-              placeholder="e.g. Hearing fee"
-              value={form.description}
-              onChange={e => setForm({ ...form, description: e.target.value })}
-            />
+            <label className={inlineLabelClass}>Description</label>
+            <input className={inlineInputClass} placeholder="e.g. Hearing fee"
+              value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} />
           </div>
           <Button size="sm" onClick={handleAdd} disabled={!form.amount}>Save Entry</Button>
         </div>
       )}
       {fees.length === 0 ? (
-        <p className="text-sm text-slate-500 px-5 py-8 text-center">No fee entries yet.</p>
+        <p className={emptyTextClass}>No fee entries yet.</p>
       ) : (
-        <div className="divide-y divide-slate-100">
+        <div className={dividerClass}>
           {fees.map((f) => (
             <div key={f.id} className="flex items-center justify-between px-5 py-3">
               <div>
-                <p className="text-sm font-medium text-slate-900">
-                  {f.isExpense ? '- ' : '+ '}
+                <p className="text-sm font-medium text-foreground">
+                  {f.isExpense ? '− ' : '+ '}
                   {formatCurrency(Number(f.amount))}
-                  {f.paymentMode && <span className="text-xs text-slate-400 ml-2">({f.paymentMode})</span>}
+                  {f.paymentMode && <span className="text-xs text-muted-foreground ml-2">({f.paymentMode})</span>}
                 </p>
-                {f.description && <p className="text-xs text-slate-500">{f.description}</p>}
+                {f.description && <p className="text-xs text-muted-foreground">{f.description}</p>}
               </div>
               <div className="text-right">
-                <p className="text-xs text-slate-500">{f.feeDate ? formatDate(f.feeDate) : '—'}</p>
-                <span className={`text-xs px-1.5 py-0.5 rounded-full ${f.isExpense ? 'bg-red-50 text-red-600' : 'bg-green-50 text-green-600'}`}>
+                <p className="text-xs text-muted-foreground">{f.feeDate ? formatDate(f.feeDate) : '—'}</p>
+                <span className={cn(
+                  'text-xs px-1.5 py-0.5 rounded-full',
+                  f.isExpense ? 'bg-secondary text-muted-foreground' : 'bg-secondary text-foreground font-medium'
+                )}>
                   {f.isExpense ? 'Expense' : 'Income'}
                 </span>
               </div>
@@ -667,21 +625,21 @@ function CounselSection({ clients, counsel }: {
 }) {
   return (
     <div className="space-y-4">
-      <div className="bg-white rounded-lg border border-slate-200">
-        <div className="px-5 py-4 border-b border-slate-100">
-          <h3 className="font-semibold text-slate-900">Clients ({clients.length})</h3>
+      <div className={sectionCardClass}>
+        <div className={sectionHeaderClass}>
+          <h3 className="font-semibold text-foreground text-sm">Clients ({clients.length})</h3>
         </div>
         {clients.length === 0 ? (
-          <p className="text-sm text-slate-500 px-5 py-6 text-center">No clients linked.</p>
+          <p className={emptyTextClass}>No clients linked.</p>
         ) : (
-          <div className="divide-y divide-slate-100">
+          <div className={dividerClass}>
             {clients.map(({ client }) => (
               <div key={client.id} className="flex items-center justify-between px-5 py-3">
                 <div>
-                  <p className="text-sm font-medium text-slate-900">{client.fullName}</p>
-                  <p className="text-xs text-slate-500">{client.mobile} {client.email}</p>
+                  <p className="text-sm font-medium text-foreground">{client.fullName}</p>
+                  <p className="text-xs text-muted-foreground">{client.mobile} {client.email}</p>
                 </div>
-                <Link href={`/clients/${client.id}`} className="text-xs text-indigo-600 hover:underline">
+                <Link href={`/clients/${client.id}`} className="text-xs text-foreground hover:underline font-medium">
                   View
                 </Link>
               </div>
@@ -690,19 +648,19 @@ function CounselSection({ clients, counsel }: {
         )}
       </div>
 
-      <div className="bg-white rounded-lg border border-slate-200">
-        <div className="px-5 py-4 border-b border-slate-100">
-          <h3 className="font-semibold text-slate-900">Opposite Counsel ({counsel.length})</h3>
+      <div className={sectionCardClass}>
+        <div className={sectionHeaderClass}>
+          <h3 className="font-semibold text-foreground text-sm">Opposite Counsel ({counsel.length})</h3>
         </div>
         {counsel.length === 0 ? (
-          <p className="text-sm text-slate-500 px-5 py-6 text-center">No opposite counsel recorded.</p>
+          <p className={emptyTextClass}>No opposite counsel recorded.</p>
         ) : (
-          <div className="divide-y divide-slate-100">
+          <div className={dividerClass}>
             {counsel.map((c) => (
               <div key={c.id} className="px-5 py-3">
-                <p className="text-sm font-medium text-slate-900">{c.fullName}</p>
-                <p className="text-xs text-slate-500">{c.mobile} {c.email}</p>
-                {c.address && <p className="text-xs text-slate-400">{c.address}</p>}
+                <p className="text-sm font-medium text-foreground">{c.fullName}</p>
+                <p className="text-xs text-muted-foreground">{c.mobile} {c.email}</p>
+                {c.address && <p className="text-xs text-muted-foreground/60">{c.address}</p>}
               </div>
             ))}
           </div>
@@ -714,21 +672,21 @@ function CounselSection({ clients, counsel }: {
 
 function RemindersSection({ reminders, caseId }: { reminders: Reminder[]; caseId: string }) {
   return (
-    <div className="bg-white rounded-lg border border-slate-200">
-      <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100">
-        <h3 className="font-semibold text-slate-900">Reminders ({reminders.length})</h3>
-        <Button size="sm" variant="outline" asChild>
+    <div className={sectionCardClass}>
+      <div className={sectionHeaderClass}>
+        <h3 className="font-semibold text-foreground text-sm">Reminders ({reminders.length})</h3>
+        <Button size="sm" variant="outline" className="h-7 text-xs" asChild>
           <Link href={`/reminders?caseId=${caseId}`}>Manage Reminders</Link>
         </Button>
       </div>
       {reminders.length === 0 ? (
-        <p className="text-sm text-slate-500 px-5 py-8 text-center">No active reminders.</p>
+        <p className={emptyTextClass}>No active reminders.</p>
       ) : (
-        <div className="divide-y divide-slate-100">
+        <div className={dividerClass}>
           {reminders.map((r) => (
             <div key={r.id} className="px-5 py-3">
-              <p className="text-sm font-medium text-slate-900">{r.title}</p>
-              <p className="text-xs text-slate-500">
+              <p className="text-sm font-medium text-foreground">{r.title}</p>
+              <p className="text-xs text-muted-foreground">
                 {r.frequency} {r.startDate ? `• Starts ${formatDate(r.startDate)}` : ''}
               </p>
             </div>
@@ -749,25 +707,25 @@ function LinkedSection({ linkedFrom, linkedTo }: {
   ]
 
   return (
-    <div className="bg-white rounded-lg border border-slate-200">
-      <div className="px-5 py-4 border-b border-slate-100">
-        <h3 className="font-semibold text-slate-900">Linked Cases ({allLinked.length})</h3>
+    <div className={sectionCardClass}>
+      <div className={sectionHeaderClass}>
+        <h3 className="font-semibold text-foreground text-sm">Linked Cases ({allLinked.length})</h3>
       </div>
       {allLinked.length === 0 ? (
-        <p className="text-sm text-slate-500 px-5 py-8 text-center">No linked cases.</p>
+        <p className={emptyTextClass}>No linked cases.</p>
       ) : (
-        <div className="divide-y divide-slate-100">
+        <div className={dividerClass}>
           {allLinked.map((c) => (
             <div key={c.id} className="flex items-center justify-between px-5 py-3">
               <div>
-                <p className="text-sm font-medium text-slate-900">
+                <p className="text-sm font-medium text-foreground">
                   {c.firstParty} vs {c.oppositeParty}
                 </p>
-                <p className="text-xs text-slate-500">{c.caseNumber}</p>
+                <p className="text-xs text-muted-foreground">{c.caseNumber}</p>
               </div>
               <div className="flex items-center gap-2">
                 <CaseStatusBadge status={c.status} />
-                <Link href={`/cases/${c.id}`} className="text-xs text-indigo-600 hover:underline">
+                <Link href={`/cases/${c.id}`} className="text-xs text-foreground hover:underline font-medium">
                   View
                 </Link>
               </div>
