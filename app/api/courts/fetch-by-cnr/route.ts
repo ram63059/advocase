@@ -15,7 +15,7 @@ export async function POST(request: Request) {
 
     const caseData = await fetchCaseByCNR(cnr.trim().toUpperCase())
     if (!caseData) {
-      return NextResponse.json({ error: 'Case not found on eCourts' }, { status: 404 })
+      return NextResponse.json({ error: 'Case not found on eCourts. Check server logs for the raw eCourts API response.' }, { status: 404 })
     }
 
     // If caseId provided, update existing case + create history records

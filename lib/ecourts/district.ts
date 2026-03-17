@@ -110,19 +110,39 @@ export async function getComplexes(stateCode: string, districtCode: string): Pro
 // 3. Fetch Case by CNR Number
 // ─────────────────────────────────────────────
 export async function fetchCaseByCNR(cnr: string): Promise<ECourtsCaseDetail | null> {
+  const appToken = process.env.ECOURTS_APP_TOKEN ?? ''
+
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    'Referer': 'https://services.ecourts.gov.in/ecourtindia_6/',
+    'Origin': 'https://services.ecourts.gov.in',
+  }
+  if (appToken) headers['app_token'] = appToken
+
   try {
+    const body = new URLSearchParams({ cino: cnr, ajax_req: 'true', app_token: appToken }).toString()
     const res = await fetchWithTimeout(`${ECOURTS_BASE}/fetchCaseViaCNR`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ cnr_number: cnr }).toString(),
+      headers,
+      body,
     })
+
+    const text = await res.text()
+    console.log('[eCourts CNR] status:', res.status, 'body:', text.slice(0, 500))
+
     if (!res.ok) return null
 
-    const data = await res.json()
-    if (!data || data.errorMsg) return null
+    let data: any
+    try { data = JSON.parse(text) } catch { return null }
+    if (!data || data.errorMsg || data.error) {
+      console.log('[eCourts CNR] API error:', data?.errorMsg ?? data?.error)
+      return null
+    }
 
     return parseCNRResponse(data)
-  } catch {
+  } catch (err) {
+    console.error('[eCourts CNR] fetch failed:', err)
     return null
   }
 }
