@@ -93,7 +93,7 @@ export function ProfileSection({ profile }: { profile: any }) {
         <div className="relative">
           <Avatar className="h-16 w-16">
             <AvatarImage src={profile.logoUrl ?? undefined} />
-            <AvatarFallback className="bg-indigo-100 text-indigo-700 text-lg font-semibold">
+            <AvatarFallback className="bg-secondary text-foreground text-lg font-semibold">
               {getInitials(profile.fullName ?? 'A')}
             </AvatarFallback>
           </Avatar>
@@ -101,16 +101,16 @@ export function ProfileSection({ profile }: { profile: any }) {
             type="button"
             onClick={() => fileRef.current?.click()}
             disabled={avatarUploading}
-            className="absolute -bottom-1 -right-1 w-7 h-7 bg-white border border-slate-200 rounded-full flex items-center justify-center shadow-sm hover:bg-slate-50 transition-colors"
+            className="absolute -bottom-1 -right-1 w-7 h-7 bg-card border border-border rounded-full flex items-center justify-center shadow-sm hover:bg-secondary transition-colors"
           >
-            <Camera size={13} className="text-slate-600" />
+            <Camera size={13} className="text-muted-foreground" />
           </button>
         </div>
         <div>
-          <p className="text-sm font-medium text-slate-700">Profile / Logo</p>
-          <p className="text-xs text-slate-500">PNG, JPG. Max 2MB. Used in PDF exports.</p>
+          <p className="text-sm font-medium text-foreground">Profile / Logo</p>
+          <p className="text-xs text-muted-foreground">PNG, JPG. Max 2MB. Used in PDF exports.</p>
           {avatarUploading && (
-            <p className="text-xs text-indigo-600 mt-1">Uploading...</p>
+            <p className="text-xs text-muted-foreground mt-1">Uploading...</p>
           )}
         </div>
         <input
@@ -128,7 +128,7 @@ export function ProfileSection({ profile }: { profile: any }) {
             <Label htmlFor="fullName">Full Name *</Label>
             <Input id="fullName" {...register('fullName')} className="mt-1" />
             {errors.fullName && (
-              <p className="text-xs text-red-500 mt-1">{errors.fullName.message}</p>
+              <p className="text-xs text-destructive mt-1">{errors.fullName.message}</p>
             )}
           </div>
           <div>
@@ -138,8 +138,8 @@ export function ProfileSection({ profile }: { profile: any }) {
         </div>
         <div>
           <Label>Email</Label>
-          <Input value={profile.email} readOnly className="mt-1 bg-slate-50 text-slate-500 cursor-not-allowed" />
-          <p className="text-xs text-slate-400 mt-1">Email cannot be changed</p>
+          <Input value={profile.email} readOnly className="mt-1 bg-secondary text-muted-foreground cursor-not-allowed" />
+          <p className="text-xs text-muted-foreground/60 mt-1">Email cannot be changed</p>
         </div>
         <div>
           <Label htmlFor="officeName">Office / Chamber Name</Label>

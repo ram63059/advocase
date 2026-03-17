@@ -73,7 +73,7 @@ export function BankDetailsSection({ profile }: { profile: any }) {
         <div>
           <Label htmlFor="upiId">UPI ID</Label>
           <Input id="upiId" {...register('upiId')} placeholder="name@upi" className="mt-1" />
-          <p className="text-xs text-slate-400 mt-1">Used to generate QR code in invoice footer</p>
+          <p className="text-xs text-muted-foreground/60 mt-1">Used to generate QR code in invoice footer</p>
         </div>
         <Button type="submit" size="sm" disabled={saving}>
           {saving ? 'Saving...' : 'Save Bank Details'}

@@ -45,10 +45,10 @@ export function DangerZoneSection({ profileId }: { profileId: string }) {
     <SettingsSection id="danger" title="Danger Zone">
       <div className="space-y-4">
         {/* Export data */}
-        <div className="flex items-start justify-between gap-4 p-4 rounded-lg border border-slate-200">
+        <div className="flex items-start justify-between gap-4 p-4 rounded-xl border border-border">
           <div>
-            <p className="text-sm font-medium text-slate-800">Export All Data</p>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-sm font-medium text-foreground">Export All Data</p>
+            <p className="text-xs text-muted-foreground mt-0.5">
               Download all your cases, clients, tasks, and reminders as JSON
             </p>
           </div>
@@ -59,14 +59,14 @@ export function DangerZoneSection({ profileId }: { profileId: string }) {
         </div>
 
         {/* Delete account */}
-        <div className="p-4 rounded-lg border border-red-200 bg-red-50/30">
+        <div className="p-4 rounded-xl border border-destructive/20 bg-destructive/5">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="text-sm font-medium text-red-800 flex items-center gap-1.5">
+              <p className="text-sm font-medium text-destructive flex items-center gap-1.5">
                 <AlertTriangle size={14} />
                 Delete Account
               </p>
-              <p className="text-xs text-red-600 mt-0.5">
+              <p className="text-xs text-destructive/70 mt-0.5">
                 Permanently delete your account and all associated data. This cannot be undone.
               </p>
             </div>
@@ -75,7 +75,7 @@ export function DangerZoneSection({ profileId }: { profileId: string }) {
                 variant="outline"
                 size="sm"
                 onClick={() => setShowDeleteForm(true)}
-                className="border-red-200 text-red-600 hover:bg-red-50 shrink-0"
+                className="border-destructive/30 text-destructive hover:bg-destructive/10 shrink-0"
               >
                 <Trash2 size={14} className="mr-1.5" />
                 Delete Account
@@ -85,14 +85,14 @@ export function DangerZoneSection({ profileId }: { profileId: string }) {
 
           {showDeleteForm && (
             <div className="mt-4 space-y-3">
-              <p className="text-sm text-red-700">
+              <p className="text-sm text-destructive/80">
                 Type <strong>DELETE</strong> to confirm account deletion:
               </p>
               <Input
                 value={confirmText}
                 onChange={e => setConfirmText(e.target.value)}
                 placeholder="Type DELETE"
-                className="max-w-xs border-red-200 focus:ring-red-500"
+                className="max-w-xs border-destructive/30"
               />
               <div className="flex gap-2">
                 <Button

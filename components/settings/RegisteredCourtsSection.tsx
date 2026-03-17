@@ -92,26 +92,26 @@ export function RegisteredCourtsSection({ courts: initialCourts, profileId }: Re
       description="Courts synced with eCourts for automated case updates"
     >
       {initialCourts.length > 0 && (
-        <div className="bg-white rounded-lg border border-slate-200 overflow-hidden mb-4">
+        <div className="bg-card rounded-xl border border-border overflow-hidden mb-4">
           <table className="w-full text-sm">
-            <thead className="bg-slate-50 border-b border-slate-200">
+            <thead className="bg-secondary/50 border-b border-border">
               <tr>
-                <th className="px-4 py-2.5 text-left text-xs font-medium text-slate-500">Court Type</th>
-                <th className="px-4 py-2.5 text-left text-xs font-medium text-slate-500">Location</th>
-                <th className="px-4 py-2.5 text-left text-xs font-medium text-slate-500">Bar Code</th>
-                <th className="px-4 py-2.5 text-left text-xs font-medium text-slate-500">Last Synced</th>
+                <th className="px-4 py-2.5 text-left text-xs font-medium text-muted-foreground">Court Type</th>
+                <th className="px-4 py-2.5 text-left text-xs font-medium text-muted-foreground">Location</th>
+                <th className="px-4 py-2.5 text-left text-xs font-medium text-muted-foreground">Bar Code</th>
+                <th className="px-4 py-2.5 text-left text-xs font-medium text-muted-foreground">Last Synced</th>
                 <th className="px-4 py-2.5" />
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-border">
               {initialCourts.map(court => (
-                <tr key={court.id} className="hover:bg-slate-50">
-                  <td className="px-4 py-3 font-medium text-slate-800">{court.courtType}</td>
-                  <td className="px-4 py-3 text-slate-600 text-xs">
+                <tr key={court.id} className="hover:bg-secondary/30">
+                  <td className="px-4 py-3 font-medium text-foreground">{court.courtType}</td>
+                  <td className="px-4 py-3 text-muted-foreground text-xs">
                     {[court.courtComplex, court.district, court.state].filter(Boolean).join(', ') || '-'}
                   </td>
-                  <td className="px-4 py-3 font-mono text-slate-600 text-xs">{court.barCode ?? '-'}</td>
-                  <td className="px-4 py-3 text-xs text-slate-500">
+                  <td className="px-4 py-3 font-mono text-muted-foreground text-xs">{court.barCode ?? '-'}</td>
+                  <td className="px-4 py-3 text-xs text-muted-foreground">
                     {court.lastSyncedAt
                       ? new Date(court.lastSyncedAt).toLocaleDateString('en-IN', {
                           day: '2-digit', month: 'short', year: 'numeric',
@@ -134,7 +134,7 @@ export function RegisteredCourtsSection({ courts: initialCourts, profileId }: Re
                         variant="ghost"
                         size="sm"
                         onClick={() => handleDelete(court.id)}
-                        className="h-7 text-xs text-red-500 hover:text-red-700 hover:bg-red-50"
+                        className="h-7 text-xs text-muted-foreground hover:text-destructive"
                       >
                         <Trash2 size={12} />
                       </Button>
@@ -148,7 +148,7 @@ export function RegisteredCourtsSection({ courts: initialCourts, profileId }: Re
       )}
 
       {showForm ? (
-        <form onSubmit={handleAdd} className="bg-slate-50 rounded-lg border border-slate-200 p-4 space-y-3">
+        <form onSubmit={handleAdd} className="bg-secondary/30 rounded-xl border border-border p-4 space-y-3">
           <div className="grid grid-cols-2 gap-3">
             <div>
               <Label className="text-xs">Court Type *</Label>

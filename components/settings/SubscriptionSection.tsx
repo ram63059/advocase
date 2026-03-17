@@ -7,17 +7,17 @@ import { CheckCircle } from 'lucide-react'
 const PLAN_DETAILS = {
   free: {
     label: 'Free',
-    color: 'bg-slate-100 text-slate-700 border-slate-200',
+    color: 'bg-secondary text-foreground border-border',
     features: ['50 cases', '20 clients', 'No team members', 'Basic features'],
   },
   basic: {
     label: 'Basic',
-    color: 'bg-blue-50 text-blue-700 border-blue-200',
+    color: 'bg-secondary text-foreground border-border',
     features: ['500 cases', '200 clients', '2 team members', 'PDF exports', 'Email reminders'],
   },
   pro: {
     label: 'Pro',
-    color: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+    color: 'bg-foreground text-background border-foreground',
     features: [
       'Unlimited cases',
       'Unlimited clients',
@@ -54,7 +54,7 @@ export function SubscriptionSection({ plan, planExpiresAt }: SubscriptionSection
               {planInfo.label} Plan
             </Badge>
             {planExpiresAt && (
-              <span className="text-xs text-slate-500">
+              <span className="text-xs text-muted-foreground">
                 Expires {new Date(planExpiresAt).toLocaleDateString('en-IN', {
                   day: '2-digit', month: 'short', year: 'numeric',
                 })}
@@ -64,8 +64,8 @@ export function SubscriptionSection({ plan, planExpiresAt }: SubscriptionSection
 
           <ul className="space-y-1.5">
             {planInfo.features.map(f => (
-              <li key={f} className="flex items-center gap-2 text-sm text-slate-600">
-                <CheckCircle size={14} className="text-emerald-500 shrink-0" />
+              <li key={f} className="flex items-center gap-2 text-sm text-muted-foreground">
+                <CheckCircle size={14} className="text-foreground shrink-0" />
                 {f}
               </li>
             ))}
@@ -74,10 +74,10 @@ export function SubscriptionSection({ plan, planExpiresAt }: SubscriptionSection
 
         {currentPlan !== 'pro' && (
           <div className="shrink-0">
-            <Button size="sm" className="bg-indigo-600 hover:bg-indigo-700">
+            <Button size="sm">
               Upgrade to Pro
             </Button>
-            <p className="text-xs text-slate-400 mt-1.5 text-center">Coming soon</p>
+            <p className="text-xs text-muted-foreground/60 mt-1.5 text-center">Coming soon</p>
           </div>
         )}
       </div>

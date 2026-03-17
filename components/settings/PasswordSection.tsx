@@ -63,7 +63,7 @@ export function PasswordSection() {
             className="mt-1"
           />
           {errors.currentPassword && (
-            <p className="text-xs text-red-500 mt-1">{errors.currentPassword.message}</p>
+            <p className="text-xs text-destructive mt-1">{errors.currentPassword.message}</p>
           )}
         </div>
         <div>
@@ -75,7 +75,7 @@ export function PasswordSection() {
             className="mt-1"
           />
           {errors.newPassword && (
-            <p className="text-xs text-red-500 mt-1">{errors.newPassword.message}</p>
+            <p className="text-xs text-destructive mt-1">{errors.newPassword.message}</p>
           )}
         </div>
         <div>
@@ -87,7 +87,7 @@ export function PasswordSection() {
             className="mt-1"
           />
           {errors.confirmPassword && (
-            <p className="text-xs text-red-500 mt-1">{errors.confirmPassword.message}</p>
+            <p className="text-xs text-destructive mt-1">{errors.confirmPassword.message}</p>
           )}
         </div>
         <Button type="submit" size="sm" disabled={saving}>

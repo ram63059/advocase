@@ -13,9 +13,8 @@ interface SettingsPageClientProps {
 
 export function SettingsPageClient({ profile, courts }: SettingsPageClientProps) {
   return (
-    <div className="max-w-2xl mx-auto space-y-6 pb-16">
-      <h1 className="text-2xl font-semibold text-slate-900">Settings</h1>
-
+    <div className="max-w-2xl mx-auto space-y-5 pb-16">
+      <h1 className="text-xl font-semibold text-foreground">Settings</h1>
       <ProfileSection profile={profile} />
       <BankDetailsSection profile={profile} />
       <PasswordSection />
